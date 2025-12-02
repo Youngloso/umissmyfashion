@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสินค้า - U Miss My Fashion</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="product-detail.css"> 
+    </head>
+<body>
+    
+    <header>
+        <h1>UMissMyFashion</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">หน้าหลัก</a></li>
+                <li><a href="products.html">สินค้าทั้งหมด</a></li> 
+                <li><a href="category-shirts.html">เสื้อผ้า</a></li> 
+                <li><a href="category-pants.html">กางเกง</a></li> 
+                <li><a href="category-accessories.html">เครื่องประดับ</a></li> 
+                <li><a href="#">วิธีการสั่งซื้อ</a></li>
+                <li><a href="#">ติดต่อเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="product-detail">
+        <div class="container">
+            
+            <div class="detail-grid">
+                
+                <div class="gallery-column">
+                    <div class="image-section-box"> <div class="thumbnail-list" id="thumbnail-list">
+                            </div>
+    
+                        <div class="main-image-box"> 
+                            <img id="main-product-image" class="main-image" src="placeholder.jpg" alt="รูปภาพสินค้าหลัก">
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="info-column">
+                    <div class="info-section-box"> <h1 id="product-title" class="product-title">ชื่อสินค้าจะโหลดตรงนี้</h1> 
+                        <p class="product-price">ราคาจะโหลดตรงนี้</p>
+                        <p class="product-description">คำอธิบายสินค้าจะโหลดตรงนี้</p>
+
+                        <hr> <div class="size-box">
+                            <h4>Size :</h4>
+                            <div class="size-select" id="size-selector"> 
+                                </div>
+                        </div>
+
+                        <div class="qty-box">
+                            <label>จำนวน:</label>
+                            <div class="quantity-selector">
+                                <button id="decrement-btn" class="qty-btn">-</button>
+                                <span id="quantity-display">1</span>
+                                <button id="increment-btn" class="qty-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="#" class="btn-cart" id="add-to-cart-btn">🛒 เพิ่มลงตะกร้า</a>
+                            <a href="#" class="btn-buy">BUY NOW</a>
+                        </div>
+                    </div> </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>ติดต่อด่วน: <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" style="color: white; text-decoration: none;">LINE ID: @umissmyfashion</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- ฐานข้อมูลสินค้า (Product Database) ---//
+        const productData = {
+            // 1. Fear of God Essentials Jersey Crewneck (P001)
+            "P001": {
+                name: "Fear of God Essentials Jersey Crewneck",
+                description: "เสื้อยืดคอกลมจากแบรนด์ดัง Fear of God Essentials ดีไซน์เรียบง่ายแต่ดูดี สวมใส่ได้ทุกโอกาส เนื้อผ้าคอตตอน 100% สวมใส่สบาย", 
+                sizes: ['S', 'M', 'L', 'XL'], 
+                colors: [
+                    { name: "Black", img: "images/p1black.jpg" },
+                    { name: "Brown", img: "images/p1namtan.jpg"},
+                    { name : "Gray", img: "images/p1gray.jpg"},
+                ],
+                price: "฿2,675",
+            },
+            
+            // 2. Stussy Body Scan Tee (P002)
+            "P002": {
+                name: "Stussy Body Scan Tee",
+                description: "เสื้อยืดคุณภาพดี สไตล์สตรีทแฟชั่นงานนำเข้า ดีไซน์ล้ำ เท่ไม่เหมือนใคร เหมาะกับทุกลุค",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "Ash Heather", img: "images/p2ash.jpg" },
+                    { name: "Black Heather", img: "images/p2black.jpg" },
+                    { name: "Blue Heather", img: "images/p2blue.jpg" }
+                ],
+                price: "฿3,600",
+            },
+            
+            // 3. Vlone Smoke Demon Angel Hoodie (P003)
+            "P003": {
+                name: "Vlone Smoke Demon Angel Hoodie",
+                description: "เสื้อแขนยาว Hoodies สุดเท่ ดีไซน์กราฟิก Angel Smoke ด้านหลัง ผ้า Fleece หนา อบอุ่น เหมาะสำหรับใส่ในทุกสภาพอากาศ", 
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "White", img: "images/p3white.jpg" },
+                    { name: "Black", img: "images/p3black.jpg"},
+                ],
+                price: "฿3,350",
+                
+            },
+
+            // 4. Nike x Stussy 8 Ball T-shirt (P004)
+            "P004": {
+                name: "Nike x Stussy 8 Ball T-shirt",
+                description: "เสื้อยืดคอลเลกชันพิเศษที่ร่วมมือกันระหว่าง Nike และ Stussy ดีไซน์ลูกสนุ๊กเกอร์หมายเลข 8 อันเป็นเอกลักษณ์",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "White", img: "images/p4white.jpg" },
+                    { name: "White", img: "images/p4whiteback.jpg"},
+                ],
+                price: "฿5,000",
+            },
+
+            // 5. Stussy Ist Venus Pig. Dyed Tee (P005)
+            "P005": {
+                name: "Stussy Ist Venus Pig. Dyed Tee",
+                description: "เสื้อยืดสกรีนลายกราฟิก Ist Venus เทคนิค Pigment Dyed ให้สีสันและเนื้อผ้าที่มีเอกลักษณ์ไม่ซ้ำใคร",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "Blue", img: "images/p5blue.jpg" },
+                    { name: "Black", img: "images/p5black.jpg" },
+                    { name: "White", img: "images/p5white.jpg"},
+                ],
+                price: "฿6,400",
+            },
+
+            // 6. Mardi Mercredi Tshirt Flowermardi (P006)
+            "P006": {
+                name: "Mardi Mercredi Tshirt Flowermardi",
+                description: "เสื้อยืดสกรีนลายดอกไม้สุดฮิตจาก Mardi Mercredi สวมใส่สบาย ดีไซน์น่ารัก เหมาะสำหรับวันสบายๆ",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "Black Pink", img: "images/p6black.jpg" },
+                    { name : "Black Cream", img: "images/p6cream.jpg"},     
+                ],
+                price: "฿1,100",
+            },
+
+            // 7. Mardi Mercredi Sweatshirt Flowermardi Blossom (P007)
+            "P007": {
+                name: "Mardi Mercredi Sweatshirt Flowermardi Blossom",
+                description: "เสื้อสเวตเตอร์ลายดอกไม้สุดคลาสสิก ผ้าหนา นุ่ม อบอุ่น เหมาะสำหรับใส่คู่กับกางเกงยีนส์",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [
+                    { name: "Oatmeal Black", img: "images/p7black.jpg" },
+                    { name: "Oatmeal Taupe", img: "images/p7som.jpg" }
+                ],
+                price: "฿2,400",
+            },
+
+            // 8. Drew House Mascot SS Tee (P008)
+            "P008": {
+                name: "Drew House Mascot SS Tee",
+                description: "เสื้อยืดลายมาสคอตหน้ายิ้มอันเป็นเอกลักษณ์ของ Drew House แบรนด์แฟชั่นจาก Justin Bieber",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p8black.jpg" }],
+                price: "฿2,700",
+            },
+
+            // 9. Marithe Francois Girbaud W Vintage Baseball Ringer Tee Pink (P009)
+            "P009": {
+                name: "Marithe Francois Girbaud W Vintage Baseball Ringer Tee",
+                description: "เสื้อยืด Ringer สไตล์เบสบอลวินเทจจาก Marithe Francois Girbaud ขอบคอตัดสีตัดกัน ดีไซน์ย้อนยุค",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Pink", img: "images/p9pink.jpg" }],
+                price: "฿1,400",
+            },
+
+            // 10. Stussy Look Beyond Tee Pigment Dyed Black (P010)
+            "P010": {
+                name: "Stussy Look Beyond Tee Pigment Dyed",
+                description: "เสื้อยืดสกรีนกราฟิก 'Look Beyond' เทคนิค Pigment Dyed ทำให้สีซีดลงเล็กน้อย ดูวินเทจและมีสไตล์",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p10black.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 11. Stussy Look Beyond Tee Pigment Dyed White (P011)
+            "P011": {
+                name: "Stussy Look Beyond Tee Pigment Dyed",
+                description: "เสื้อยืดสกรีนกราฟิก 'Look Beyond' เทคนิค Pigment Dyed สีขาว สไตล์วินเทจ สวมใส่สบาย",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "White", img: "images/p11white.jpg" }],
+                price: "฿2,400",
+            },
+            
+            // 12. Lifework New Silket Short-Sleeve TS Black (P012)
+            "P012": {
+                name: "Lifework New Silket Short-Sleeve TS",
+                description: "เสื้อยืดแขนสั้นผ้า Silket คุณภาพสูง ให้สัมผัสเรียบลื่น ระบายอากาศได้ดี พร้อมโลโก้แบรนด์ Lifework",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p12black.jpg" }],
+                price: "฿1,400",
+            },
+            
+            // 13. Uniqlo Kaws Pink BFF Tee White (P013)
+            "P013": {
+                name: "Uniqlo Kaws Pink BFF Tee",
+                description: "เสื้อยืดคอลเลกชันร่วมกับ Kaws ลาย BFF (ตุ๊กตา Companion) สีชมพูสุดน่ารัก ผ้าคอตตอนนุ่ม ใส่สบาย",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "White", img: "images/p13white.jpg" }],
+                price: "฿3,400",
+            },
+
+            // 14. Carnival Calligraphy Logo Ovs Black (P014)
+            "P014": {
+                name: "Carnival Calligraphy Logo Ovs",
+                description: "เสื้อยืด Oversize จาก Carnival พิมพ์โลโก้แบบ Calligraphy ที่ด้านหน้า ผ้าหนา คุณภาพดี สวมใส่ทนทาน",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p14black.jpg" }],
+                price: "฿1,400",
+            },
+
+            // 15. Denim Tears The Cotton Wreath Sweatshirt Black (P015)
+            "P015": {
+                name: "Denim Tears The Cotton Wreath Sweatshirt",
+                description: "เสื้อสเวตเตอร์สุดฮิตจาก Denim Tears ลาย Cotton Wreath อันเป็นสัญลักษณ์ ผ้าหนาคุณภาพดี",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p15black.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 16. Carnival x Marvel Venom OVS T-Shirt Black (P016)
+            "P016": {
+                name: "Carnival x Marvel Venom OVS T-Shirt",
+                description: "เสื้อยืด Oversize คอลเลกชันร่วมมือกับ Marvel ลาย Venom สุดดุดัน พิมพ์ลายเต็มด้านหลัง",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p16black.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 17. acmé de la vie Baby Face Donuts 1 R T-Shirt Black (P017)
+            "P017": {
+                name: "acmé de la vie Baby Face Donuts 1 R T-Shirt",
+                description: "เสื้อยืดลาย Baby Face โดนัทสุดน่ารักจาก acmé de la vie (ADLV) สไตล์เกาหลี ยอดนิยม",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black", img: "images/p17black.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 18. Marithe Francois Girbaud W Vintage Baseball Ringer Tee Ivory (P018)
+            "P018": {
+                name: "Marithe Francois Girbaud W Vintage Baseball Ringer Tee",
+                description: "เสื้อยืด Ringer สไตล์เบสบอลวินเทจ สีขาว Ivory ขอบคอตัดสีน้ำเงิน ดีไซน์ย้อนยุคจาก Marithe Francois Girbaud",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Ivory", img: "images/p18white.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 19. Cosmic The 1975 Tee (P019)
+            "P019": {
+                name: "Cosmic The 1975 Tee",
+                description: "เสื้อยืดลายวงดนตรี The 1975 พิมพ์ลายกราฟิก Cosmic ย้อนยุค สวมใส่สบาย เหมาะสำหรับแฟนคลับ",
+                sizes: ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "White", img: "images/p19white.jpg" }],
+                price: "฿2,400",
+            },
+
+            // 20. Carnival x UMBRO M Jersey Carnival Striped Black White (P020)
+            "P020": {
+                name: "Carnival x UMBRO M Jersey Carnival Striped",
+                description: "เสื้อฟุตบอล Jersey คอลเลกชันพิเศษร่วมกับ UMBRO ลายทางสีขาวดำ สไตล์สปอร์ตแฟชั่น",
+                sizes:  ['S', 'M', 'L', 'XL'],
+                colors: [{ name: "Black White", img: "images/p20white.jpg" }],
+                price: "฿2,400",
+            },
+        };
+
+        // --- ฟังก์ชันหลักในการโหลดข้อมูลและกำหนด Event ---
+        function loadProductDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+            
+            const product = productData[productId] || productData["P002"]; 
+
+            // 3. อัปเดตเนื้อหา HTML ตามข้อมูลสินค้า
+            
+            const baseColor = product.colors[0].name;
+            const fullTitle = `${product.name} ${baseColor}`;
+            
+            document.getElementById('product-title').textContent = fullTitle; 
+            document.querySelector('.product-description').textContent = product.description;
+            document.querySelector('.product-price').textContent = product.price;
+            document.title = `${product.name} - U Miss My Fashion`;
+
+            // อัปเดต Size Selector
+            const sizeSelector = document.getElementById('size-selector');
+            sizeSelector.innerHTML = '';
+            product.sizes.forEach((size, index) => {
+                const button = document.createElement('button');
+                button.textContent = size;
+                if (index === 0) { 
+                    button.classList.add('active');
+                }
+                sizeSelector.appendChild(button);
+            });
+
+            // อัปเดต Thumbnail และรูปภาพหลัก
+            const mainImage = document.getElementById('main-product-image'); 
+            const thumbnailList = document.getElementById('thumbnail-list');
+            thumbnailList.innerHTML = '';
+            
+            product.colors.forEach((color, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = color.img;
+                thumb.dataset.img = color.img;
+                thumb.dataset.colorName = color.name;
+                // ใช้ class 'thumb' ตาม CSS ของคุณ
+                thumb.className = index === 0 ? 'thumb active' : 'thumb'; 
+                thumb.alt = color.name;
+                thumbnailList.appendChild(thumb);
+                
+                // กำหนดรูปหลักเริ่มต้น
+                if (index === 0) {
+                    mainImage.src = color.img;
+                }
+            });
+            
+            // 4. ผูก Event Listeners ทั้งหมดเข้ากับองค์ประกอบใหม่
+            attachAllEventListeners(product.name, productId);
+        }
+
+
+        // --- ฟังก์ชันผูก Event Listeners (สำหรับ Size, Quantity, Thumbnail) ---
+        function attachAllEventListeners(baseName, productId) {
+            
+            // 1. Quantity (จำนวน)
+            const decrementBtn = document.getElementById('decrement-btn');
+            const incrementBtn = document.getElementById('increment-btn');
+            const quantityDisplay = document.getElementById('quantity-display');
+
+            function updateQuantity(change) {
+                let currentQuantity = parseInt(quantityDisplay.textContent);
+                let newQuantity = currentQuantity + change;
+                if (newQuantity < 1) newQuantity = 1;
+                quantityDisplay.textContent = newQuantity;
+            }
+
+            if (incrementBtn) incrementBtn.addEventListener('click', () => updateQuantity(1));
+            if (decrementBtn) decrementBtn.addEventListener('click', () => updateQuantity(-1));
+
+            // 2. Size selector (ขนาด)
+            const sizeSelector = document.getElementById('size-selector');
+            if (sizeSelector) {
+                sizeSelector.addEventListener('click', e => {
+                    if(e.target.tagName === 'BUTTON'){
+                        sizeSelector.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                    }
+                });
+            }
+
+            // 3. Thumbnail changing (รูปภาพ + ชื่อสินค้า)
+            const mainImage = document.getElementById('main-product-image');
+            const thumbnails = document.querySelectorAll('.thumb'); 
+            const productTitleElement = document.getElementById('product-title');
+            const baseTitle = baseName;
+
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+
+                    mainImage.src = thumb.dataset.img;
+
+                    const newColorName = thumb.dataset.colorName;
+                    productTitleElement.textContent = baseTitle + ' ' + newColorName;
+
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
+            });
+            
+            // 4. Add to Cart Button 
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); // ป้องกันการเปลี่ยนหน้าเมื่อคลิกปุ่ม a tag
+                    
+                    const selectedSize = sizeSelector.querySelector('.active')?.textContent || 'Not selected';
+                    const selectedQuantity = parseInt(quantityDisplay.textContent);
+                    const selectedColorName = document.querySelector('.thumbnail-list .active')?.dataset.colorName || 'Not selected';
+                    const selectedImgUrl = document.querySelector('.thumbnail-list .active')?.dataset.img || mainImage.src;
+                    
+                    // สร้างวัตถุสินค้า
+                    const cartItem = {
+                        id: productId,
+                        name: baseTitle,
+                        color: selectedColorName,
+                        size: selectedSize,
+                        quantity: selectedQuantity,
+                        price: productData[productId].price,
+                        img: selectedImgUrl
+                    };
+                    
+                    // ดึงรายการสินค้าในตะกร้าจาก Local Storage หรือสร้างใหม่ถ้าไม่มี
+                    let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+                    
+                    // ตรวจสอบว่าสินค้านี้ (ID, สี, ขนาด) มีอยู่แล้วหรือไม่
+                    const existingItemIndex = cart.findIndex(item => 
+                        item.id === cartItem.id && 
+                        item.color === cartItem.color && 
+                        item.size === cartItem.size
+                    );
+
+                    if (existingItemIndex > -1) {
+                        // ถ้ามีอยู่แล้ว ให้อัปเดตจำนวน
+                        cart[existingItemIndex].quantity += selectedQuantity;
+                        alert(`เพิ่ม ${baseTitle} (x${selectedQuantity}) ลงตะกร้าแล้ว! (รวม ${cart[existingItemIndex].quantity} ชิ้น)`);
+                    } else {
+                        // ถ้ายังไม่มี ให้เพิ่มเข้าไปในตะกร้า
+                        cart.push(cartItem);
+                        alert(`เพิ่ม ${baseTitle} (x${selectedQuantity}) ลงตะกร้าแล้ว!`);
+                    }
+
+                    // บันทึกรายการตะกร้าที่อัปเดตแล้วกลับไปที่ Local Storage
+                    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+                    
+                    console.log("ตะกร้าสินค้าปัจจุบัน:", cart);
+                });
+            }
+        }
+
+        // --- จุดเริ่มต้นการทำงานของสคริปต์ (เมื่อ DOM โหลดเสร็จ) ---
+        document.addEventListener('DOMContentLoaded', loadProductDetails);
+    </script>
+</body>
+</html>
