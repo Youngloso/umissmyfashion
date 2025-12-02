@@ -1,0 +1,320 @@
+/* ================================================= */
+/* 0. Global Setup & Structure (ปรับ Layout ทั่วไป) */
+/* ================================================= */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* สีพื้นหลังอ่อนลง */
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px; /* กำหนดความกว้างสูงสุด */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ================================================= */
+/* 1. PRODUCT DETAIL LAYOUT NEW - ADJUSTED */
+/* ================================================= */
+
+.product-detail {
+    padding-top: 50px;
+    padding-bottom: 50px; 
+}
+
+/* --- LAYOUT หลัก: ใช้ Grid เพื่อแบ่งคอลัมน์หลัก --- */
+.detail-grid {
+    display: grid;
+    /* ⭐ ปรับสัดส่วนรูปภาพต่อรายละเอียดให้รูปภาพใหญ่ขึ้น ⭐ */
+    grid-template-columns: 1.2fr 1fr; /* รูปภาพ 1.2 ส่วน, ข้อมูล 1 ส่วน */
+    gap: 40px; 
+    align-items: start;
+}
+
+/* ------------------------------------------------- */
+/* 2. LEFT SIDE – GALLERY COLUMN (รูปภาพ) */
+/* ------------------------------------------------- */
+
+.gallery-column {
+    display: flex; 
+    gap: 20px;
+}
+
+/* ⭐ กล่องกรอบสำหรับรูปภาพและ Thumbnail ⭐ */
+.image-section-box {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
+    border: 1px solid #e0e0e0; 
+    flex: 1; 
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+}
+
+/* รูปย่อยเรียงแนวตั้ง */
+.thumbnail-list {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    width: 80px; 
+    flex-shrink: 0; 
+}
+
+.thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: .2s;
+}
+
+.thumb.active,
+.thumb:hover {
+    opacity: 1;
+    border: 2px solid #333;
+}
+
+/* กล่องรูปภาพหลัก */
+.main-image-box {
+    flex: 1; 
+    text-align: center;
+    align-self: center; 
+}
+
+.main-image-box img {
+    width: 100%;
+    max-height: 520px; /* ⭐ เพิ่ม max-height เพื่อให้รูปภาพหลักใหญ่ขึ้น ⭐ */
+    object-fit: contain;
+    display: block;
+}
+
+
+/* ------------------------------------------------- */
+/* 3. RIGHT SIDE – INFO COLUMN (รายละเอียดสินค้า) */
+/* ------------------------------------------------- */
+
+/* ⭐ กล่องกรอบสำหรับข้อมูลสินค้า ⭐ */
+.info-section-box {
+    background-color: #ffffff; 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
+    border-left: 5px solid #e0ac5b; 
+}
+
+.info-column .product-title {
+    font-size: 2.4em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.product-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #cc4444; 
+    margin-bottom: 20px;
+}
+
+/* เส้นคั่น */
+.info-section-box hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 25px 0;
+}
+
+/* เลือกขนาดเสื้อ */
+.size-box {
+    margin-bottom: 25px;
+}
+
+.size-box h4 {
+    font-size: 1em;
+    font-weight: normal;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.size-select button {
+    border: 1px solid #aaa;
+    padding: 10px 18px; 
+    margin-right: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1em; 
+    border-radius: 5px;
+}
+
+.size-select button:hover {
+    border-color: #000;
+}
+
+.size-select .active {
+    background: #000;
+    color: white;
+    border-color: #000;
+}
+
+/* QTY BUTTON */
+.qty-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    font-size: 1.1em; 
+    font-weight: bold;
+}
+
+.quantity-selector {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    background: #f8f8f8;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: #e0e0e0;
+}
+
+#quantity-display {
+    padding: 0 15px;
+    min-width: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+/* BUTTONS */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px; 
+}
+
+/* สไตล์พื้นฐานสำหรับปุ่มที่เป็นลิงก์ (a tag) */
+.btn-cart, .btn-buy {
+    text-decoration: none;
+    text-align: center;
+    display: block; 
+    padding: 12px 28px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    font-weight: bold;
+    flex: 1; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+
+.btn-cart {
+    background: #333;
+    color: white;
+}
+
+.btn-buy {
+    background: #e0ac5b;
+    color: #1a1a1a;
+}
+
+.btn-cart:hover {
+    background: #000;
+}
+
+.btn-buy:hover {
+    background: #d4a04d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ------------------------------------------------- */
+/* 4. MOBILE RESPONSIVE (ปรับปรุง) */
+/* ------------------------------------------------- */
+
+@media(max-width: 992px) {
+    /* ปรับ grid ให้เป็นคอลัมน์เดียวสำหรับ Tablet/Mobile */
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .gallery-column {
+        flex-direction: column; 
+    }
+
+    /* ปรับให้รูปย่อเรียงแนวนอนอยู่ด้านบนรูปหลัก */
+    .image-section-box {
+        flex-direction: column;
+    }
+
+    .thumbnail-list {
+        flex-direction: row; 
+        justify-content: center;
+        width: 100%; 
+    }
+    
+    .thumb {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* ทำให้ปุ่มสั่งซื้อเต็มความกว้างในโหมดมือถือ */
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-cart, .btn-buy {
+        width: 100%;
+        box-shadow: none; 
+    }
+    
+    .btn-buy:hover {
+        transform: none; 
+    }
+
+    /* ⭐ ปรับ header สำหรับมือถือ ⭐ */
+    header .container {
+        flex-direction: column; /* เรียงโลโก้และเมนูเป็นคอลัมน์ */
+    }
+
+    header h1 {
+        font-size: 1.8em; 
+        margin-bottom: 10px; /* เพิ่มระยะห่างด้านล่างโลโก้ */
+    }
+
+    header nav ul {
+        flex-direction: row; /* ให้เมนูหลักยังเรียงแนวนอนอยู่ */
+        flex-wrap: wrap; /* ให้ขึ้นบรรทัดใหม่ได้ */
+        justify-content: center;
+    }
+    header nav ul li a {
+        padding: 8px 10px; /* ลด padding เมนูในมือถือ */
+    }
+}
