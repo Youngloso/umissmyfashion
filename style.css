@@ -61,15 +61,15 @@ nav li a:hover {
 }
 
 /* =================================== */
-/* ส่วน Hero Section (จุดที่แก้ไขใส่รูป Canva) */
+/* ส่วน Hero Section (แก้ไขใส่รูป k6yshirt) */
 /* =================================== */
 .hero {
-    /* เปลี่ยนชื่อไฟล์ภาพตรง 'hero-bg.png' ให้ตรงกับที่คุณอัปโหลดขึ้น GitHub */
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-bg.png');
-    background-size: cover;      /* ให้รูปขยายเต็มพื้นที่ */
-    background-position: center;  /* จัดให้กึ่งกลางรูปอยู่กลางจอ */
+    /* ดึงรูปภาพชื่อ k6yshirt.png จากโฟลเดอร์ images */
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/k6yshirt.png');
+    background-size: cover;      
+    background-position: center;  
     background-repeat: no-repeat;
-    height: 450px;               /* ปรับความสูงเพิ่มขึ้นเล็กน้อยให้ดูเต็มตาแบบตัวอย่าง */
+    height: 450px;               
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,9 +82,9 @@ nav li a:hover {
 }
 .hero-content h2 {
     font-family: 'UMMF-DeutschGothic', serif;
-    font-size: 3em;              /* ขยายหัวข้อให้เด่นขึ้น */
+    font-size: 3.5em;              /* ขยายหัวข้อให้เด่นขึ้นอีกนิด */
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* เพิ่มเงาให้ตัวหนังสืออ่านง่ายขึ้น */
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* เพิ่มเงาเข้มขึ้นเพื่อให้ลอยเด่นจากรูป */
 }
 .hero-content p {
     font-size: 1.3em;
@@ -224,7 +224,7 @@ footer p {
         height: 350px;
     }
     .hero-content h2 {
-        font-size: 2em;
+        font-size: 2.2em;
     }
     .product-grid {
         grid-template-columns: 1fr;
