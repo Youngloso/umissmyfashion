@@ -38,7 +38,7 @@ section {
 /* =================================== */
 header {
     /* *** โค้ดที่แก้ไข: กลับมาใช้พื้นหลังสีเข้ม และจัดโครงสร้าง Flex *** */
-    background-color: #1a2a6c;
+    background-color: #000000;
     color: white;
     padding: 20px 40px; 
     display: flex;
@@ -70,7 +70,7 @@ nav li a:hover {
 /* การจัดแต่งส่วนโปรโมทหลัก (Hero Section) */
 /* =================================== */
 .hero {
-    background-color: #1a2a6c; 
+    background-color: #000000; 
     height: 400px;
     display: flex;
     justify-content: center;
@@ -257,4 +257,5 @@ footer p {
     }
 
 }
+
 
