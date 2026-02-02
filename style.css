@@ -71,7 +71,7 @@ nav li a:hover {
 /* =================================== */
 .hero {
     background-color: #000000; 
-    height: 400px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -257,5 +257,6 @@ footer p {
     }
 
 }
+
 
 
