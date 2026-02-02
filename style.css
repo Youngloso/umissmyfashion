@@ -38,7 +38,7 @@ section {
 /* =================================== */
 header {
     /* *** โค้ดที่แก้ไข: กลับมาใช้พื้นหลังสีเข้ม และจัดโครงสร้าง Flex *** */
-    background-color: #000000;
+    background-color: #FFFF66;
     color: white;
     padding: 20px 40px; 
     display: flex;
@@ -255,4 +255,5 @@ footer p {
     .product-item img {
         height: 200px; /* ลดความสูงรูปบนมือถือ */
     }
+
 }
