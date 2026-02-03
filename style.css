@@ -1,30 +1,34 @@
 /* =================================== */
-/* code ฟอนต์
+/*              code ฟอนต์
 /* =================================== */
 @font-face {
-    font-family: 'UMMF-DeutschGothic';
+    font-family: 'UMMF-DeutschGothic'; /* ชื่อฟอนต์ที่คุณจะใช้เรียกใน CSS */
+    /* *** PATH: ตรวจสอบให้แน่ใจว่าไฟล์ Deutsch.ttf อยู่ในโฟลเดอร์ fonts/ *** */
     src: url('fonts/Deutsch.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
 
+/* 1. CSS Reset: ลบขอบและช่องว่างอัตโนมัติของเบราว์เซอร์ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* 2. กำหนดฟอนต์พื้นฐาน */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4; 
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    display: flex; /* สำหรับ Sticky Footer */
+    flex-direction: column; /* สำหรับ Sticky Footer */
+    min-height: 100vh; /* สำหรับ Sticky Footer */
 }
 html {
-    height: 100%;
+    height: 100%; /* สำหรับ Sticky Footer */
 }
 
+/* 3. ทำให้ Section เนื้อหาหลักยืดออก (สำหรับ Sticky Footer) */
 section {
     flex-grow: 1; 
 }
@@ -40,6 +44,7 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+/* *** โค้ด font  *** */
 header h1 {
     font-family: 'UMMF-DeutschGothic', serif; 
     font-size: 2.5em; 
@@ -61,40 +66,35 @@ nav li a:hover {
 }
 
 /* =================================== */
-/* ส่วน Hero Section (แก้ไขใส่รูป k6yshirt) */
+/*         (Hero Section)              */
 /* =================================== */
 .hero {
-    /* ดึงรูปภาพชื่อ k6yshirt.png จากโฟลเดอร์ images */
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/k6yshirt.png');
-    background-size: cover;      
-    background-position: center;  
-    background-repeat: no-repeat;
-    height: 450px;               
+    background-color: #000000; 
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white; 
 }
-
 .hero-content {
     padding: 30px;
 }
+/* ***  เพิ่มฟอนต์ Gothic ให้กับหัวข้อ Hero *** */
 .hero-content h2 {
     font-family: 'UMMF-DeutschGothic', serif;
-    font-size: 3.5em;              /* ขยายหัวข้อให้เด่นขึ้นอีกนิด */
+    font-size: 2.5em;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7); /* เพิ่มเงาเข้มขึ้นเพื่อให้ลอยเด่นจากรูป */
 }
 .hero-content p {
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin-bottom: 20px;
 }
 .btn {
     display: inline-block;
     background-color: #e0ac5b;
     color: #333;
-    padding: 12px 30px;
+    padding: 10px 25px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -105,7 +105,7 @@ nav li a:hover {
 }
 
 /* =================================== */
-/* โค้ดส่วนที่เหลือ (คงเดิม) */
+/*  Product Showcase & Product Listing */
 /* =================================== */
 .container {
     width: 95%; 
@@ -118,6 +118,7 @@ nav li a:hover {
     padding: 40px 0;
     text-align: center;
 }
+/* *** ฟอนต์ Gothic ให้กับหัวข้อ Products *** */
 .products h2 {
     font-family: 'UMMF-DeutschGothic', serif;
     font-size: 2.5em; 
@@ -154,7 +155,7 @@ nav li a:hover {
     width: 100%;
     height: 290px; 
     object-fit: contain; 
-    background-color: #f9f9f9; 
+    background-color: #ffffff; 
     margin-bottom: 15px; 
     border-radius: 8px; 
 }
@@ -188,6 +189,9 @@ nav li a:hover {
     background-color: #555;
 }
 
+/* =================================== */
+/* โค้ดสำหรับ Footer */
+/* =================================== */
 footer {
     background-color: #333;
     color: white;
@@ -200,17 +204,25 @@ footer p {
     margin: 5px 0;
 }
 
+/* =================================== */
+/* Responsive Design (สำหรับมือถือและแท็บเล็ต) */
+/* =================================== */
 @media (max-width: 768px) {
+    /* บนมือถือ ให้ลด Padding ด้านข้างลงเหลือ 20px */
     .container {
         padding: 20px 20px;
     }
+    
+    /* ส่วน Header/Menu */
     header {
         flex-direction: column;
         padding: 15px 20px;
     }
+    /* *** โค้ดที่แก้ไข: ปรับขนาดฟอนต์บนมือถือ *** */
     header h1 {
         font-size: 2em;
     }
+    /* **************************************** */
     nav ul {
         margin-top: 10px;
         flex-wrap: wrap;
@@ -220,14 +232,19 @@ footer p {
         padding: 5px 10px;
         font-size: 1em;
     }
+    
+    /* ส่วน Hero */
     .hero {
-        height: 350px;
+        height: 300px;
     }
+    /* *** โค้ดที่แก้ไข: ปรับขนาดฟอนต์ Hero บนมือถือ *** */
     .hero-content h2 {
-        font-size: 2.2em;
+        font-size: 2em;
     }
+
+    /* ส่วน Product Listing (หน้า products.html) */
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* บนมือถือให้แสดงทีละ 1 คอลัมน์ */
         gap: 20px;
     }
     .product-item {
@@ -235,6 +252,6 @@ footer p {
         margin-bottom: 0;
     }
     .product-item img {
-        height: 200px;
+        height: 200px; /* ลดความสูงรูปบนมือถือ */
     }
 }
