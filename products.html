@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สินค้าทั้งหมด - U Miss My Fashion</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ตกแต่ง Badge ตะกร้าให้สวยขึ้น */
+        #cart-count {
+            background: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 11px;
+            position: absolute;
+            top: -8px;
+            right: -15px;
+            font-weight: bold;
+            border: 2px solid #000000;
+            display: none;
+        }
+        .nav-cart-link {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
     
@@ -12,170 +33,111 @@
         <h1>UMissMyFashion</h1>
         <nav>
             <ul>
-                <li><a href="index.html">หน้าหลัก</a></li>
-                <li><a href="products.html">สินค้าทั้งหมด</a></li> 
-                <li><a href="category-shirts.html">เสื้อผ้า</a></li> 
-                <li><a href="category-pants.html">กางเกง</a></li> 
-                <li><a href="category-accessories.html">เครื่องประดับ</a></li> 
-                <li><a href="#">ติดต่อเรา</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">All Product</a></li> 
+                <li><a href="shirt.html">Streetwear</a></li> 
+                <li><a href="jeans.html">Jeans</a></li> 
+                <li><a href="Luxury.html">Luxury</a></li> 
+                <li>
+                    <a href="cart.html" class="nav-cart-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <section class="products">
         <div class="container">
-            <h2> U Miss My Fashion</h2>
-            
+            <h2 style="text-align: center; margin: 30px 0;">U MISS MY FASHION</h2>
             <div class="product-grid">
                 
-                <div class="product-item">
-                    <img src="images/p2ash.jpg" alt="Stussy Body Scan Tee Ash Heather">
-                    <h3>Stussy Body Scan Tee Ash Heather</h3>
-                    <p>ราคา: 3,600 บาท</p>
-                    <a href="product-detail.html?id=P002" class="btn-product">ดูรายละเอียด</a>
-                </div>
+                <div class="product-item"><img src="images/p1black.jpg"><h3>Fear of God Essentials</h3><p>2,675 บาท</p><a href="product-detail.html?id=P001" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Baggy 1981M</h3><p>18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L1.jpg"><h3>Miu Miu Sunglasses</h3><p>15,500 บาท</p><a href="product-detail.html?id=L1" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p5blue.jpg"><h3>Stussy Ist Venus</h3><p>6,400 บาท</p><a href="product-detail.html?id=P005" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J15.jpg"><h3>LV SS23 Jeans</h3><p>45,000 บาท</p><a href="product-detail.html?id=J015" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L15.jpg"><h3>Gucci Mini Bag</h3><p>38,000 บาท</p><a href="product-detail.html?id=L15" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p8black.jpg"><h3>Drew House Mascot</h3><p>2,700 บาท</p><a href="product-detail.html?id=P008" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Denim</h3><p>38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p2ash.jpg"><h3>Stussy Body Scan Tee</h3><p>3,600 บาท</p><a href="product-detail.html?id=P002" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L9.jpg"><h3>Celine Triomphe Belt</h3><p>18,500 บาท</p><a href="product-detail.html?id=L9" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J20.jpg"><h3>Chanel Women Blue</h3><p>88,000 บาท</p><a href="product-detail.html?id=J020" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p4white.jpg"><h3>Nike x Stussy 8 Ball</h3><p>5,000 บาท</p><a href="product-detail.html?id=P004" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L5.jpg"><h3>Vivienne Choker</h3><p>7,900 บาท</p><a href="product-detail.html?id=L5" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>19,800 บาท</p><a href="product-detail.html?id=J011" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p13white.jpg"><h3>Uniqlo Kaws Pink</h3><p>3,400 บาท</p><a href="product-detail.html?id=P013" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L2.jpg"><h3>Coach Nolita 19</h3><p>4,900 บาท</p><a href="product-detail.html?id=L2" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J7.jpg"><h3>YSL Skinny Fit</h3><p>24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p10black.jpg"><h3>Stussy Look Beyond</h3><p>2,400 บาท</p><a href="product-detail.html?id=P010" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L12.jpg"><h3>Prada Rectangle</h3><p>12,900 บาท</p><a href="product-detail.html?id=L12" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J14.jpg"><h3>Loewe Women's</h3><p>29,000 บาท</p><a href="product-detail.html?id=J014" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p16black.jpg"><h3>Carnival x Venom</h3><p>2,400 บาท</p><a href="product-detail.html?id=P016" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L17.jpg"><h3>DiorSignature B1U</h3><p>16,900 บาท</p><a href="product-detail.html?id=L17" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Loose Fit</h3><p>22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p3white.jpg"><h3>Vlone Smoke Demon</h3><p>2,350 บาท</p><a href="product-detail.html?id=P003" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L7.jpg"><h3>Coach Andrea Bag</h3><p>8,500 บาท</p><a href="product-detail.html?id=L7" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J17.jpg"><h3>Bottega Wide-Leg</h3><p>42,000 บาท</p><a href="product-detail.html?id=J017" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p19white.jpg"><h3>Cosmic The 1975</h3><p>2,400 บาท</p><a href="product-detail.html?id=P019" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L3.jpg"><h3>LV Key Pouch</h3><p>11,500 บาท</p><a href="product-detail.html?id=L3" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p6black.jpg"><h3>Mardi Mercredi</h3><p>1,100 บาท</p><a href="product-detail.html?id=P006" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L10.jpg"><h3>YSL Cassandre</h3><p>16,500 บาท</p><a href="product-detail.html?id=L10" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Jeans Men</h3><p>32,000 บาท</p><a href="product-detail.html?id=J012" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p15black.jpg"><h3>Denim Tears Sweat</h3><p>2,400 บาท</p><a href="product-detail.html?id=P015" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L14.jpg"><h3>Vivienne Octavie</h3><p>6,500 บาท</p><a href="product-detail.html?id=L14" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Relaxed Blue</h3><p>15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p9pink.jpg"><h3>Marithe Ringer</h3><p>1,400 บาท</p><a href="product-detail.html?id=P009" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L6.jpg"><h3>Longchamp Green</h3><p>5,400 บาท</p><a href="product-detail.html?id=L6" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J19.jpg"><h3>Acne Cut Off</h3><p>17,000 บาท</p><a href="product-detail.html?id=J019" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p11white.jpg"><h3>Stussy Look Beyond</h3><p>2,400 บาท</p><a href="product-detail.html?id=P011" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L16.jpg"><h3>Gucci Marmont</h3><p>17,900 บาท</p><a href="product-detail.html?id=L16" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Barrel</h3><p>34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p14black.jpg"><h3>Carnival Logo</h3><p>1,400 บาท</p><a href="product-detail.html?id=P014" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L8.jpg"><h3>Balenciaga Dynasty</h3><p>14,900 บาท</p><a href="product-detail.html?id=L8" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J18.jpg"><h3>SS24 Dark Blue</h3><p>26,000 บาท</p><a href="product-detail.html?id=J018" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p17black.jpg"><h3>ADLV Baby Donuts</h3><p>2,400 บาท</p><a href="product-detail.html?id=P017" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L11.jpg"><h3>Vivienne Drop Ear</h3><p>5,200 บาท</p><a href="product-detail.html?id=L11" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan</h3><p>35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p12black.jpg"><h3>Lifework Silket</h3><p>1,400 บาท</p><a href="product-detail.html?id=P012" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L4.jpg"><h3>Coach Cow Belts</h3><p>3,200 บาท</p><a href="product-detail.html?id=L4" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstruct</h3><p>38,000 บาท</p><a href="product-detail.html?id=J013" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p7black.jpg"><h3>Mardi Sweatshirt</h3><p>2,400 บาท</p><a href="product-detail.html?id=P007" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L13.jpg"><h3>Vivienne Relief</h3><p>8,900 บาท</p><a href="product-detail.html?id=L13" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Relaxed W/G</h3><p>16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p18white.jpg"><h3>Marithe Baseball</h3><p>2,400 บาท</p><a href="product-detail.html?id=P018" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J16.jpg"><h3>Celine Kitty</h3><p>39,000 บาท</p><a href="product-detail.html?id=J016" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p20white.jpg"><h3>Carnival x UMBRO</h3><p>2,400 บาท</p><a href="product-detail.html?id=P020" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Denim</h3><p>85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">รายละเอียด</a></div>
 
-                <div class="product-item">
-                    <img src="images/p1black.jpg" alt="Fear of God Essentials Jersey Crewneck">
-                    <h3>Fear of God Essentials Jersey Crewneck</h3>
-                    <p>ราคา: 2,675 บาท</p>
-                    <a href="product-detail.html?id=P001" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p3white.jpg" alt="Vlone Smoke Demon Angel Hoodie White">
-                    <h3>Vlone Smoke Demon Angel Hoodie White</h3>
-                    <p>ราคา: 2,350 บาท</p>
-                    <a href="product-detail.html?id=P003" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p4white.jpg" alt="Nike x Stussy 8 Ball T-shirt (Asia Sizing) White">
-                    <h3>Nike x Stussy 8 Ball T-shirt (Asia Sizing) White</h3>
-                    <p>ราคา: 5,000 บาท</p>
-                    <a href="product-detail.html?id=P004" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p5blue.jpg" alt="Stussy Ist Venus Pig. Dyed Tee Blue">
-                    <h3>Stussy Ist Venus Pig. Dyed Tee Blue</h3>
-                    <p>ราคา: 6,400 บาท</p>
-                    <a href="product-detail.html?id=P005" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p6black.jpg" alt="Mardi Mercredi Tshirt Flowermardi Black Pink">
-                    <h3>Mardi Mercredi Tshirt Flowermardi Black Pink</h3>
-                    <p>ราคา: 1,100 บาท</p>
-                    <a href="product-detail.html?id=P006" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p7black.jpg" alt="Mardi Mercredi Sweatshirt Flowermardi Blossom Oatmeal Black">
-                    <h3>Mardi Mercredi Sweatshirt Flowermardi Blossom Oatmeal Black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P007" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p8black.jpg" alt="Drew House Mascot SS Tee Black">
-                    <h3>Drew House Mascot SS Tee Black</h3>
-                    <p>ราคา: 2,700 บาท</p>
-                    <a href="product-detail.html?id=P008" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p9pink.jpg" alt="Marithe Francois Girbaud W Vintage Baseball Ringer Tee Pink">
-                    <h3>Marithe Francois Girbaud W Vintage Baseball Ringer Tee Pink</h3>
-                    <p>ราคา: 1,400 บาท</p>
-                    <a href="product-detail.html?id=P009" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p10black.jpg" alt="Stussy Look Beyond Tee Pigment Dyed Black">
-                    <h3>Stussy Look Beyond Tee Pigment Dyed Black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P010" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p11white.jpg" alt="Stussy Look Beyond Tee Pigment Dyed Black">
-                    <h3>Stussy Look Beyond Tee Pigment Dyed Black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P011" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p12black.jpg" alt="Lifework New Silket Short-Sleeve TS Black">
-                    <h3>Lifework New Silket Short-Sleeve TS Black</h3>
-                    <p>ราคา: 1,400 บาท</p>
-                    <a href="product-detail.html?id=P012" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p13white.jpg" alt="Uniqlo Kaws Pink BFF Tee White">
-                    <h3>Uniqlo Kaws Pink BFF Tee White</h3>
-                    <p>ราคา: 3,400 บาท</p>
-                    <a href="product-detail.html?id=P013" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p14black.jpg" alt="Carnival Calligraphy Logo Ovs Black">
-                    <h3>Carnival Calligraphy Logo Ovs Black</h3>
-                    <p>ราคา: 1,400 บาท</p>
-                    <a href="product-detail.html?id=P014" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p15black.jpg" alt="Denim Tears The Cotton Wreath Sweatshirt Black">
-                    <h3>Denim Tears The Cotton Wreath Sweatshirt Black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P015" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p16black.jpg" alt="Carnival x Marvel Venom OVS T-Shirt Black">
-                    <h3>Carnival x Marvel Venom OVS T-Shirt Black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P016" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p17black.jpg" alt="acmé de la vie Baby Face Donuts 1 R T-Shirt Black">
-                    <h3>acmé de la vie baby black</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P017" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p18white.jpg" alt="Marithe Francois Girbaud W Vintage Baseball Ringer Tee Ivory">
-                    <h3>Marithe Francois Girbaud W Vintage Baseball Ringer Tee Ivory</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P018" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p19white.jpg" alt="Cosmic The 1975 Tee">
-                    <h3>Cosmic The 1975 Tee</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P019" class="btn-product">ดูรายละเอียด</a>
-                </div>
-
-                <div class="product-item">
-                    <img src="images/p20white.jpg" alt="Carnival x UMBRO M Jersey Carnival Striped Black White">
-                    <h3>Carnival x UMBRO M Jersey Carnival Striped Black White</h3>
-                    <p>ราคา: 2,400 บาท</p>
-                    <a href="product-detail.html?id=P020" class="btn-product">ดูรายละเอียด</a>
-                </div>
             </div>
-            
         </div>
-    </section>  
+    </section>
 
     <footer>
         <div class="container">
-            <p>ติดต่อด่วน: <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" style="color: white; text-decoration: none;">LINE ID: @umissmyfashion</a></p>
+            <p>ติดต่อด่วน: LINE ID: @umissmyfashion</p>
         </div>
     </footer>
+
+    <script>
+        // ฟังก์ชันอัปเดตตัวเลขตะกร้า
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            const badge = document.getElementById('cart-count');
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if(total > 0) {
+                badge.textContent = total;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        // เรียกใช้งานเมื่อโหลดหน้าเสร็จ
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
 </body>
 </html>
