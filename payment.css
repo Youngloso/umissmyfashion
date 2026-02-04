@@ -1,0 +1,90 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Sarabun', sans-serif; }
+
+.container { display: flex; min-height: 100vh; overflow: hidden; }
+
+/* ฝั่งซ้าย: Rundownyouth Style + Slider */
+.product-side {
+    flex: 1;
+    background-color: #333;
+    color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.brand-header { font-weight: bold; font-size: 1.2rem; position: absolute; top: 50px; left: 50px; }
+
+/* Slider Layout */
+.slider-container {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.slider-window { width: 100%; overflow: hidden; }
+.slider-track { display: flex; transition: transform 0.5s ease; }
+
+.product-item { 
+    min-width: 100%; 
+    text-align: center; 
+    padding: 0 10px;
+}
+.product-item img { width: 250px; border-radius: 5px; margin-bottom: 15px; background: white; padding: 10px; }
+.price-tag { font-size: 20px; font-weight: bold; margin-top: 10px; }
+
+/* Navigation */
+.slide-nav {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.5;
+}
+.slide-nav:hover { opacity: 1; }
+.prev { left: -60px; }
+.next { right: -60px; }
+
+.dots-wrapper { margin-top: 20px; display: flex; gap: 8px; }
+.dot { height: 6px; width: 6px; background: #555; border-radius: 50%; transition: 0.3s; }
+.dot.active { background: #fff; width: 18px; border-radius: 10px; }
+
+/* ฝั่งขวา: GBPrimePay Style (ของเดิมนายเป๊ะๆ) */
+.payment-side { flex: 1.2; background: #fff; display: flex; justify-content: center; padding: 50px; }
+.checkout-wrapper { width: 100%; max-width: 450px; }
+.payment-header h2 { font-size: 24px; margin-bottom: 10px; }
+.payment-header p { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+.payment-options { display: flex; gap: 12px; margin-bottom: 30px; }
+.option-card {
+    flex: 1; border: 1px solid #e8e8e8; border-radius: 12px; padding: 15px;
+    text-align: center; cursor: pointer; background: #ffffff; transition: all 0.2s ease;
+}
+.option-card.active { border: 2px solid #00457c; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.option-card .logos { height: 35px; display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px; }
+.option-card .logos img { height: 100%; max-width: 45px; object-fit: contain; }
+.option-card span { display: block; font-size: 13px; color: #333; }
+
+/* QR Design */
+.gb-qr-container { width: 100%; max-width: 380px; margin: 0 auto; border: 1px solid #eeeeee; border-radius: 10px; overflow: hidden; background: #ffffff; }
+.thai-qr-banner { background-color: #00457c; color: #ffffff; padding: 12px; text-align: center; font-weight: bold; font-size: 16px; }
+.promptpay-logo-sub { padding-top: 20px; text-align: center; }
+.promptpay-logo-sub img { height: 35px; }
+.qr-main-display { padding: 20px; text-align: center; }
+.qr-main-display img { width: 220px; }
+.qr-footer-info { padding: 20px; background: #fafafa; border-top: 1px solid #eee; text-align: center; }
+.merchant-name { color: #888; font-size: 14px; }
+.qr-footer-info h1 { font-size: 32px; color: #000; margin-top: 5px; }
+.song-credit { font-size: 11px; color: #cc9d52; margin-top: 8px; }
+
+/* Form Style */
+.credit-card-form input { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; background: #f9f9f9; }
+.input-row { display: flex; gap: 15px; }
+.btn-pay-gold { width: 100%; padding: 18px; background: #cc9d52; color: white; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; }
