@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ชำระเงิน - U Miss My Fashion</title>
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="product-side">
+        <div class="brand-header">U MISS MY FASHION</div>
+        
+        <div class="slider-container">
+            <button class="slide-nav prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider-window">
+                <div id="payment-items-list" class="slider-track">
+                    </div>
+            </div>
+            <button class="slide-nav next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <div id="slider-dots" class="dots-wrapper"></div>
+    </div>
+
+    <div class="payment-side">
+        <div class="checkout-wrapper">
+            <div class="payment-header">
+                <h2>ช่องทางการชำระเงิน</h2>
+                <p id="method-label">ชำระด้วย คิวอาร์โค้ด</p>
+            </div>
+
+            <div class="payment-options">
+                <div class="option-card" onclick="switchMethod('card')" id="btn-card">
+                    <div class="logos">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                    </div>
+                    <span>บัตรเครดิต</span>
+                </div>
+                <div class="option-card active" onclick="switchMethod('qr')" id="btn-qr">
+                    <div class="logos">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/PromptPay-logo.png" alt="PromptPay">
+                    </div>
+                    <span>คิวอาร์โค้ด</span>
+                </div>
+            </div>
+
+            <div id="qr-section" class="method-view">
+                <div class="gb-qr-container">
+                    <div class="thai-qr-banner">THAI QR PAYMENT</div>
+                    <div class="promptpay-logo-sub">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/PromptPay-logo.png" alt="PromptPay">
+                    </div>
+                    <div class="qr-main-display">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://www.youtube.com/watch?v=hXHoOaY3MHw" alt="QR Code">
+                    </div>
+                    <div class="qr-footer-info">
+                        <p class="merchant-name">UMissMyFashion</p>
+                        <h1 class="grand-total-val">฿0.00</h1>
+                        <p class="song-credit">♪ Playing BanPak 2026 - 2K</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-section" class="method-view" style="display: none; margin-top: 40px;">
+                <div class="credit-card-form">
+                    <div class="input-box">
+                        <input type="text" placeholder="เลขบัตรเครดิต .... .... .... ....">
+                    </div>
+                    <div class="input-row">
+                        <input type="text" placeholder="MM / YY">
+                        <input type="password" placeholder="CVC">
+                    </div>
+                    <button class="btn-pay-gold">ชำระเงินทันที: <span class="grand-total-val">฿0.00</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    let totalItems = 0;
+
+    function switchMethod(method) {
+        const qrSec = document.getElementById('qr-section');
+        const cardSec = document.getElementById('card-section');
+        const btnQr = document.getElementById('btn-qr');
+        const btnCard = document.getElementById('btn-card');
+        const label = document.getElementById('method-label');
+
+        if (method === 'card') {
+            qrSec.style.display = 'none'; cardSec.style.display = 'block';
+            btnCard.classList.add('active'); btnQr.classList.remove('active');
+            label.innerText = 'ชำระด้วย บัตรเครดิต';
+        } else {
+            qrSec.style.display = 'block'; cardSec.style.display = 'none';
+            btnQr.classList.add('active'); btnCard.classList.remove('active');
+            label.innerText = 'ชำระด้วย คิวอาร์โค้ด';
+        }
+    }
+
+    function renderPaymentPage() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const listWrapper = document.getElementById('payment-items-list');
+        const dotsContainer = document.getElementById('slider-dots');
+        
+        if (cart.length === 0) {
+            listWrapper.innerHTML = "<p>ไม่มีสินค้าในตะกร้า</p>";
+            return;
+        }
+
+        totalItems = cart.length;
+        let subtotal = 0;
+        let html = "";
+        let dotsHtml = "";
+
+        cart.forEach((item, index) => {
+            subtotal += (item.price * item.quantity);
+            html += `
+                <div class="product-item">
+                    <div class="img-wrapper">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="item-info">
+                        <h3>${item.name}</h3>
+                        <p>Size: ${item.size} | จำนวน: ${item.quantity}</p>
+                        <p class="price-tag">฿${(item.price * item.quantity).toLocaleString()}</p>
+                    </div>
+                </div>`;
+            dotsHtml += `<span class="dot ${index === 0 ? 'active' : ''}"></span>`;
+        });
+
+        listWrapper.innerHTML = html;
+        dotsContainer.innerHTML = dotsHtml;
+
+        const grandTotal = (subtotal + 70).toLocaleString(undefined, {minimumFractionDigits: 2});
+        document.querySelectorAll('.grand-total-val').forEach(el => el.innerText = "฿" + grandTotal);
+    }
+
+    function moveSlide(n) {
+        const track = document.getElementById('payment-items-list');
+        const dots = document.querySelectorAll('.dot');
+        currentSlide = (currentSlide + n + totalItems) % totalItems;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
+    }
+
+    document.addEventListener('DOMContentLoaded', renderPaymentPage);
+</script>
+</body>
+</html>
