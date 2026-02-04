@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U Miss  Fashion</title>
+    <title>U Miss Fashion</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px; /* ระยะห่างระหว่างเมนู */
+        }
+
+        nav ul li a {
+            color: #FFFFFF !important;    /* สีขาวบริสุทธิ์ */
+            font-weight: bold !important; /* ตัวหนาแบบ Cart */
+            text-decoration: none;        /* ไม่มีเส้นใต้ */
+            font-size: 18px;              /* ปรับขนาดให้ชัดเจน */
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffca85 !important;    /* เวลาเอาเมาส์ชี้ให้เปลี่ยนสีนิดนึง */
+        }
+    </style>
 </head>
 <body>
     
@@ -13,48 +33,49 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="products.html" target="_blank">All Product</a></li>
-                <li><a href="https://line.me/ti/p/@umissmyfashion" target="_blank">Contact Us</a></li>
-            </ul>
-        </nav>
+                <li><a href="products.html">All Product</a></li> 
+                <li><a href="shirt.html">Streetwear</a></li> 
+                <li><a href="jeans.html">Jeans</a></li> 
+                <li><a href="Luxury.html">Luxury</a></li> 
+            </ul> </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content    ">
+        <div class="hero-content">
             <h2>เสื้อผ้าแฟชั่นใหม่ล่าสุด</h2>
             <p>อยากเท่แบบเรา? ก็มาจัดเลย!</p>
-            <a href="products.html" class="btn" target="_blank" class="btn">Shop</a>
+            <a href="products.html" class="btn">Shop</a>
         </div>
     </section> 
     
-  <section class="products">
-    <div class="container">
-        <h2>สินค้าขายดีประจำสัปดาห์</h2>
-        <div class="product-grid">
-            
-            <div class="product-item">
-                <img src="images/p1black.jpg" alt="Fear of God Essentials Jersey Crewneck">
-                <h3>Fear of God Essentials Jersey Crewneck</h3>
-                <p>ราคา: 2,675 บาท</p>
-                <a href="product-detail.html?id=P001" class="btn-product">ดูรายละเอียด</a>
-            </div>
+    <section class="products">
+        <div class="container">
+            <h2>สินค้าขายดีประจำสัปดาห์</h2>
+            <div class="product-grid">
+                
+                <div class="product-item">
+                    <img src="images/p1black.jpg" alt="Fear of God Essentials">
+                    <h3>Fear of God Essentials</h3>
+                    <p>ราคา: 2,675 บาท</p>
+                    <a href="product-detail.html?id=P001" class="btn-product">ดูรายละเอียด</a>
+                </div>
 
-            <div class="product-item">
-                <img src="images/p2ash.jpg" alt="Stussy Body Scan Tee Ash Heather">
-                <h3>Stussy Body Scan Tee Ash Heather</h3>
-                <p>ราคา: 3,600 บาท</p>
-                <a href="product-detail.html?id=P002" class="btn-product">ดูรายละเอียด</a>
-            </div>
+                <div class="product-item">
+                    <img src="images/p2ash.jpg" alt="Stussy Body Scan Tee">
+                    <h3>Stussy Body Scan Tee</h3>
+                    <p>ราคา: 3,600 บาท</p>
+                    <a href="product-detail.html?id=P002" class="btn-product">ดูรายละเอียด</a>
+                </div>
 
-            <div class="product-item">
-                <img src="images/p3white.jpg" alt="Vlone Smoke Demon Angel Hoodie White">
-                <h3>Vlone Smoke Demon Angel Hoodie White</h3>
-                <p>ราคา: 2,350 บาท</p>
-                <a href="product-detail.html?id=P003" class="btn-product">ดูรายละเอียด</a>
+                <div class="product-item">
+                    <img src="images/p3white.jpg" alt="Vlone Smoke Demon">
+                    <h3>Vlone Smoke Demon</h3>
+                    <p>ราคา: 2,350 บาท</p>
+                    <a href="product-detail.html?id=P003" class="btn-product">ดูรายละเอียด</a>
+                </div>
+                
             </div>
-            
         </div>
-    </div>
     </section>
 
     <footer>
@@ -63,5 +84,76 @@
         </div>
     </footer>
     
+<div class="contact-wrapper">
+    <div class="social-popups" id="socialPopups">
+        <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line">
+            <i class="fa-brands fa-line"></i>
+        </a>
+    </div>
+    
+    <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
+        <span class="contact-label" id="contactLabel">Contact us</span>
+        <div class="main-contact-btn">
+            <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleContact() {
+    const popups = document.getElementById('socialPopups');
+    const icon = document.getElementById('contactIcon');
+    const label = document.getElementById('contactLabel');
+
+    if (popups.style.display === 'flex') {
+        popups.style.display = 'none';
+        icon.className = 'fa-solid fa-comment-dots';
+        label.classList.remove('hidden');
+    } else {
+        popups.style.display = 'flex';
+        icon.className = 'fa-solid fa-xmark';
+        label.classList.add('hidden');
+    }
+}
+</script>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="contact-wrapper">
+        <div class="social-popups" id="socialPopups">
+            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line">
+                <i class="fa-brands fa-line"></i>
+            </a>
+        </div>
+        <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
+            <span class="contact-label" id="contactLabel">Contact us</span>
+            <div class="main-contact-btn">
+                <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="side-cart" id="sideCart">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span class="close-btn" onclick="closeCart()">&times; Close</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>รวมทั้งหมด:</span>
+                <span id="cartTotalAmount">฿0</span>
+            </div>
+            <a href="cart.html" class="view-cart-btn" style="text-decoration: none; border: 1px solid #000; color: #000; display: block; text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; font-weight: bold;">ดูหน้าตะกร้าสินค้า</a>
+            <button class="checkout-btn" onclick="location.href='https://line.me/ti/p/@umissmyfashion'" style="width: 100%; background: #000; color: #fff; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">สั่งซื้อและชำระเงิน</button>
+        </div>
+    </div>
 </body>
 </html>
