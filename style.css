@@ -255,3 +255,303 @@ footer p {
         height: 200px; /* ลดความสูงรูปบนมือถือ */
     }
 }
+/* =================================== */
+/* Floating Contact Button (ที่เพิ่มใหม่) */
+/* =================================== */
+
+/* จัดตำแหน่งปุ่มไว้ขวาล่าง */
+.contact-wrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ตัวหนังสือสีขาวในกล่อง Contact us */
+.contact-label {
+    background: white;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin-right: 5px;
+}
+
+/* ปุ่มกลมสีดำที่มีไอคอนแชท */
+.main-contact-btn {
+    background-color: #000;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.main-contact-btn:hover { transform: scale(1.1); }
+
+/* กล่องเก็บปุ่ม IG และ LINE */
+.social-popups {
+    display: none; /* ซ่อนไว้รอเปิด */
+    flex-direction: column;
+    gap: 12px;
+    margin-right: 5px;
+    animation: slideUp 0.3s ease-out;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+/* สีตามแบรนด์ */
+.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.line { background-color: #06c755; }
+
+.social-btn:hover { transform: translateY(-5px); }
+
+/* แอนิเมชั่นตอนกดเปิด */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ซ่อน Label เมื่อเปิดปุ่ม X */
+.hidden { display: none; }
+
+/*โค้ดใหม่*/
+
+/* 1. ทำให้ตัวเลขสีแดงเด้งขึ้นมาเหมือนรูปแรก */
+#cart-count {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 11px;
+    position: absolute; /* สำคัญมาก: เพื่อให้เลขลอยทับไอคอน */
+    top: -8px;
+    right: -10px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    display: none; /* จะถูกเปิดโดย JavaScript เมื่อมีของ */
+}
+
+/* 2. ทำให้กดแล้ว Side Cart เด้งออกมาได้จริง */
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -350px; /* ซ่อนไว้ก่อน */
+    width: 350px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+    transition: 0.3s;
+    z-index: 9999;
+}
+
+.side-cart.active {
+    right: 0; /* แสดงออกมาเมื่อมีการกด */
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 9998;
+}
+
+
+/* จัดการตำแหน่งไอคอนและ Badge */
+.nav-cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+#cart-count {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-weight: bold;
+    border: 2px solid #000;
+    display: none; /* จะแสดงผลเมื่อมีสินค้าผ่าน JS */
+}
+
+/* ปรับปรุงหน้าตา Side Cart (จากรูปที่ส่งมา) */
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -100%; /* ซ่อนไว้ */
+    width: 350px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: 0.4s ease;
+    z-index: 9999;
+    padding: 0; /* เดี๋ยวไปเว้นข้างในเอา */
+    display: flex;
+    flex-direction: column;
+}
+
+.side-cart.active {
+    right: 0; /* แสดงผล */
+}
+
+.cart-header {
+    padding: 20px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    color: #333;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 9998;
+}
+
+/* ปุ่มต่างๆ ในตะกร้า */
+.checkout-btn, .view-cart-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.checkout-btn { background: #25d366; color: white; border: none; cursor: pointer; }
+.view-cart-btn { background: #000; color: white; }
+
+
+
+/* จัดการตำแหน่งเลข 2 สีแดงให้ลอยเหนือตะกร้า */
+.nav-cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+#cart-count {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-weight: bold;
+    border: 2px solid #000;
+    display: none; /* แสดงผลอัตโนมัติเมื่อมีของผ่าน JS */
+}
+
+/* ปรับแต่ง Side Cart ให้สวยงามตามรูปที่คุณต้องการ */
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -100%; /* ซ่อนไว้ทางขวา */
+    width: 350px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-cart.active {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-footer {
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+/* ปุ่มกดให้ดูโมเดิร์น */
+.view-cart-btn, .checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.view-cart-btn { background: #000; color: #fff; }
+.checkout-btn { background: #28a745; color: #fff; border: none; }
+
+/* โค้ดใหม่*/
+
+
