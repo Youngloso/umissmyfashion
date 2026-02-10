@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeans Collection - U Miss My Fashion</title>
+    <title>สินค้าทั้งหมด - U Miss My Fashion</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         nav ul { list-style: none; display: flex; gap: 20px; }
         nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
         nav ul li a:hover { color: #ffca85 !important; }
+        
         #cart-count { background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 7px; font-size: 11px; position: absolute; top: -8px; right: -10px; font-weight: bold; border: 2px solid #000000; display: none; }
         .nav-cart-link { position: relative; display: inline-block; cursor: pointer; }
-        
+
         /* Side Cart Styles */
         .side-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1001; transition: 0.4s; display: flex; flex-direction: column; }
         .side-cart.active { right: 0; }
@@ -25,11 +26,6 @@
         .view-cart-btn, .line-btn { display: block; text-align: center; padding: 12px; margin-bottom: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
         .view-cart-btn { background: #000; color: #fff; }
         .line-btn { background: #06c755; color: #fff; }
-        .cart-item { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; }
-        .cart-item-details { flex: 1; }
-        .cart-item-details h4 { font-size: 14px; margin: 0; color: #333; }
-        .remove-item { color: #ff4d4d; cursor: pointer; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -43,80 +39,31 @@
                 <li><a href="shirt.html">Streetwear</a></li> 
                 <li><a href="jeans.html">Jeans</a></li> 
                 <li><a href="Luxury.html">Luxury</a></li> 
-                <li> 
+                <li>
                     <a class="nav-cart-link" onclick="toggleCart()">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span id="cart-count">0</span>
                     </a>
-                </li> 
+                </li>
             </ul>
         </nav>
     </header>
 
     <section class="products">
         <div class="container">
-            <h2>U MISS MY FASHION</h2>
+           <h2 style="text-align: center; margin: 30px 0;">U MISS MY FASHION</h2>
+            
             <div class="product-grid">
-                <div class="product-item">
-                    <img src="images/J1.jpg" alt="Acne Studios Baggy Fit Jeans">
-                    <h3>Acne Studios Baggy Fit Jeans</h3>
-                    <p>ราคาประมาณ: 18,500 บาท</p>
-                    <a href="product-detail.html?id=J001" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J2.jpg" alt="Acne Studios Loose Fit Jeans">
-                    <h3>Acne Studios Loose Fit Jeans</h3>
-                    <p>ราคาประมาณ: 22,900 บาท</p>
-                    <a href="product-detail.html?id=J002" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J3.jpg" alt="Celine 90s Mid-Rise Jeans">
-                    <h3>Celine 90s Mid-Rise Jeans</h3>
-                    <p>ราคาประมาณ: 38,000 บาท</p>
-                    <a href="product-detail.html?id=J003" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J4.jpg" alt="Loewe Anagram Barrel Jeans">
-                    <h3>Loewe Anagram Barrel Jeans</h3>
-                    <p>ราคาประมาณ: 34,500 บาท</p>
-                    <a href="product-detail.html?id=J004" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J5.jpg" alt="Loewe Chain Jeans">
-                    <h3>Loewe Chain Jeans</h3>
-                    <p>ราคาประมาณ: 36,000 บาท</p>
-                    <a href="product-detail.html?id=J005" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J6.jpg" alt="Celine Dylan Flared Jeans">
-                    <h3>Celine Dylan Flared Jeans</h3>
-                    <p>ราคาประมาณ: 35,500 บาท</p>
-                    <a href="product-detail.html?id=J006" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J7.jpg" alt="Saint Laurent Distressed Skinny">
-                    <h3>Saint Laurent Distressed Skinny</h3>
-                    <p>ราคาประมาณ: 24,900 บาท</p>
-                    <a href="product-detail.html?id=J007" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J8.jpg" alt="Chanel Jeans Blue">
-                    <h3>Chanel Jeans Blue</h3>
-                    <p>ราคาประมาณ: 85,000 บาท</p>
-                    <a href="product-detail.html?id=J008" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J9.jpg" alt="Acne Studios White Green">
-                    <h3>Acne Studios White Green</h3>
-                    <p>ราคาประมาณ: 16,500 บาท</p>
-                    <a href="product-detail.html?id=J009" class="btn-product">ดูรายละเอียด</a>
-                </div>
-                <div class="product-item">
-                    <img src="images/J10.jpg" alt="Acne Studios Mid Blue Auz">
-                    <h3>Acne Studios Mid Blue Auz</h3>
-                    <p>ราคาประมาณ: 15,900 บาท</p>
-                    <a href="product-detail.html?id=J010" class="btn-product">ดูรายละเอียด</a>
-                </div>
+                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Studios Baggy Fit Jeans</h3><p>ราคาประมาณ: 18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Studios Loose Fit Jeans</h3><p>ราคาประมาณ: 22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Mid-Rise Jeans</h3><p>ราคาประมาณ: 38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Anagram Barrel Jeans</h3><p>ราคาประมาณ: 34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>ราคาประมาณ: 36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan Flared Jeans</h3><p>ราคาประมาณ: 35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J7.jpg"><h3>Saint Laurent Distressed Skinny</h3><p>ราคาประมาณ: 24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Jeans Blue</h3><p>ราคาประมาณ: 85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Studios White Green</h3><p>ราคาประมาณ: 16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Studios Mid Blue Auz</h3><p>ราคาประมาณ: 15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">ดูรายละเอียด</a></div>
                 <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>฿19,800</p><a href="product-detail.html?id=J011" class="btn-product">ดูรายละเอียด</a></div>
                 <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Men Denim</h3><p>฿32,000</p><a href="product-detail.html?id=J012" class="btn-product">ดูรายละเอียด</a></div>
                 <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstructed</h3><p>฿38,000</p><a href="product-detail.html?id=J013" class="btn-product">ดูรายละเอียด</a></div>
@@ -131,80 +78,83 @@
         </div>
     </section>  
 
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-    <div class="side-cart" id="cart-sidebar">
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="side-cart" id="sideCart">
         <div class="cart-header">
             <h3>ตะกร้าสินค้า</h3>
-            <span style="cursor:pointer" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i> ปิด</span>
+            <span style="cursor:pointer" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></span>
         </div>
-        <div class="cart-items" id="cart-items-list"></div>
+        <div class="cart-items" id="cartItemsList"></div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <span>รวมทั้งหมด:</span>
-                <span id="cart-total-price">฿0</span>
-            </div>
-            <a href="cart.html" class="view-cart-btn">ดูหน้าตะกร้าสินค้า</a>
-            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="line-btn"><i class="fa-brands fa-line"></i> สั่งซื้อผ่าน LINE</a>
+            <div class="cart-total"><span>รวม:</span><span id="cartTotalAmount">฿0</span></div>
+            <a href="cart.html" class="view-cart-btn">ดูตะกร้าสินค้า</a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="line-btn"><i class="fa-brands fa-line"></i> สั่งซื้อทาง LINE</a>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>ติดต่อด่วน: <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" style="color: white; text-decoration: none;">LINE ID: @umissmyfashion</a></p>
+    <div class="contact-wrapper">
+        <div class="social-popups" id="socialPopups">
+            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
         </div>
-    </footer>
+        <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
+            <span class="contact-label" id="contactLabel">Contact us</span>
+            <div class="main-contact-btn"><i class="fa-solid fa-comment-dots" id="contactIcon"></i></div>
+        </div>
+    </div>
+
+    <footer><div class="container"><p>LINE ID: @umissmyfashion</p></div></footer>
 
     <script>
-        // ระบบตะกร้า Side Cart
         function toggleCart() {
-            const sidebar = document.getElementById('cart-sidebar');
-            const overlay = document.getElementById('cart-overlay');
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            if(sidebar.classList.contains('active')) renderCartItems();
+            document.getElementById('sideCart').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+            renderSideCart();
         }
 
-        function renderCartItems() {
+        function renderSideCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const container = document.getElementById('cart-items-list');
-            const totalEl = document.getElementById('cart-total-price');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align:center; padding:20px;">ตะกร้ายังว่างเปล่า</p>';
-                totalEl.textContent = '฿0'; return;
-            }
+            const list = document.getElementById('cartItemsList');
+            const totalEl = document.getElementById('cartTotalAmount');
+            if(cart.length === 0) { list.innerHTML = '<p style="text-align:center;margin-top:20px;">ตะกร้าว่างเปล่า</p>'; totalEl.innerText = '฿0'; return; }
             let total = 0;
-            container.innerHTML = cart.map((item, index) => {
-                total += (item.price * item.quantity);
-                return `<div class="cart-item">
-                    <img src="${item.image}">
-                    <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <p>฿${item.price.toLocaleString()} x ${item.quantity}</p>
-                    </div>
-                    <span class="remove-item" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i></span>
+            list.innerHTML = cart.map((item, i) => {
+                total += item.price * item.quantity;
+                return `<div style="display:flex;gap:10px;margin-bottom:15px;border-bottom:1px solid #eee;padding-bottom:10px;">
+                    <img src="${item.image}" style="width:50px;height:50px;object-fit:cover;">
+                    <div style="flex:1;"><div style="font-size:13px;font-weight:bold;">${item.name}</div><div style="font-size:12px;">฿${item.price.toLocaleString()} x ${item.quantity}</div></div>
+                    <span onclick="removeFromCart(${i})" style="color:red;cursor:pointer;"><i class="fa-solid fa-trash"></i></span>
                 </div>`;
             }).join('');
-            totalEl.textContent = `฿${total.toLocaleString()}`;
+            totalEl.innerText = `฿${total.toLocaleString()}`;
         }
 
-        function removeFromCart(index) {
+        function removeFromCart(i) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(index, 1);
+            cart.splice(i, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
-            renderCartItems(); updateCartBadge();
+            renderSideCart(); updateBadge();
         }
 
-        function updateCartBadge() {
+        function updateBadge() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((s, i) => s + i.quantity, 0);
             const badge = document.getElementById('cart-count');
-            const total = cart.reduce((s, i) => s + i.quantity, 0);
-            if(badge) {
-                badge.textContent = total;
-                badge.style.display = total > 0 ? 'inline-block' : 'none';
-            }
+            badge.textContent = count;
+            badge.style.display = count > 0 ? 'inline-block' : 'none';
         }
 
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
+        function toggleContact() {
+            const popups = document.getElementById('socialPopups');
+            const icon = document.getElementById('contactIcon');
+            const label = document.getElementById('contactLabel');
+            const isOpen = popups.style.display === 'flex';
+            popups.style.display = isOpen ? 'none' : 'flex';
+            icon.className = isOpen ? 'fa-solid fa-comment-dots' : 'fa-solid fa-xmark';
+            if(isOpen) label.classList.remove('hidden'); else label.classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', updateBadge);
     </script>
 </body>
 </html>
