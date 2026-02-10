@@ -7,22 +7,40 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* ปรับแต่งเมนู Navigation */
         nav ul {
             list-style: none;
             display: flex;
-            gap: 20px; /* ระยะห่างระหว่างเมนู */
+            gap: 20px;
         }
 
         nav ul li a {
-            color: #FFFFFF !important;    /* สีขาวบริสุทธิ์ */
-            font-weight: bold !important; /* ตัวหนาแบบ Cart */
-            text-decoration: none;        /* ไม่มีเส้นใต้ */
-            font-size: 18px;              /* ปรับขนาดให้ชัดเจน */
+            color: #FFFFFF !important;
+            font-weight: bold !important;
+            text-decoration: none;
+            font-size: 18px;
             transition: 0.3s;
         }
 
         nav ul li a:hover {
-            color: #ffca85 !important;    /* เวลาเอาเมาส์ชี้ให้เปลี่ยนสีนิดนึง */
+            color: #ffca85 !important;
+        }
+
+        .hero-content h2 {
+            font-family: 'Inter', 'Kanit', 'Arial', sans-serif !important;
+            font-size: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-family: 'Kanit', sans-serif;
+            font-size: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -37,13 +55,14 @@
                 <li><a href="shirt.html">Streetwear</a></li> 
                 <li><a href="jeans.html">Jeans</a></li> 
                 <li><a href="Luxury.html">Luxury</a></li> 
-            </ul> </nav>
+            </ul> 
+        </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h2>เสื้อผ้าแฟชั่นใหม่ล่าสุด</h2>
-            <p>อยากเท่แบบเรา? ก็มาจัดเลย!</p>
+            <h2>New Collection</h2>
+            <p>Come Feel My Vibes</p>
             <a href="products.html" class="btn">Shop</a>
         </div>
     </section> 
@@ -84,58 +103,41 @@
         </div>
     </footer>
     
-<div class="contact-wrapper">
-    <div class="social-popups" id="socialPopups">
-        <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig">
-            <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line">
-            <i class="fa-brands fa-line"></i>
-        </a>
-    </div>
-    
-    <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
-        <span class="contact-label" id="contactLabel">Contact us</span>
-        <div class="main-contact-btn">
-            <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
+    <div class="contact-wrapper">
+        <div class="social-popups" id="socialPopups">
+            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line">
+                <i class="fa-brands fa-line"></i>
+            </a>
+        </div>
+        
+        <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
+            <span class="contact-label" id="contactLabel">Contact us</span>
+            <div class="main-contact-btn">
+                <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-function toggleContact() {
-    const popups = document.getElementById('socialPopups');
-    const icon = document.getElementById('contactIcon');
-    const label = document.getElementById('contactLabel');
+    <script>
+    // ฟังก์ชัน Contact us
+    function toggleContact() {
+        const popups = document.getElementById('socialPopups');
+        const icon = document.getElementById('contactIcon');
+        const label = document.getElementById('contactLabel');
 
-    if (popups.style.display === 'flex') {
-        popups.style.display = 'none';
-        icon.className = 'fa-solid fa-comment-dots';
-        label.classList.remove('hidden');
-    } else {
-        popups.style.display = 'flex';
-        icon.className = 'fa-solid fa-xmark';
-        label.classList.add('hidden');
+        if (popups.style.display === 'flex') {
+            popups.style.display = 'none';
+            icon.className = 'fa-solid fa-comment-dots';
+            label.style.display = 'block';
+        } else {
+            popups.style.display = 'flex';
+            icon.className = 'fa-solid fa-xmark';
+            label.style.display = 'none';
+        }
     }
-}
-</script>
-
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-    <div class="side-cart" id="sideCart">
-        <div class="cart-header">
-            <h3>Shopping Cart</h3>
-            <span class="close-btn" onclick="closeCart()">&times; Close</span>
-        </div>
-        <div class="cart-items" id="cartItems">
-            </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>รวมทั้งหมด:</span>
-                <span id="cartTotalAmount">฿0</span>
-            </div>
-            <a href="cart.html" class="view-cart-btn" style="text-decoration: none; border: 1px solid #000; color: #000; display: block; text-align: center; padding: 10px; margin-bottom: 10px; border-radius: 5px; font-weight: bold;">ดูหน้าตะกร้าสินค้า</a>
-            <button class="checkout-btn" onclick="location.href='https://line.me/ti/p/@umissmyfashion'" style="width: 100%; background: #000; color: #fff; border: none; padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">สั่งซื้อและชำระเงิน</button>
-        </div>
-    </div>
+    </script>
 </body>
 </html>
