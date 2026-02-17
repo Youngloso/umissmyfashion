@@ -3,98 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สินค้าทั้งหมด - U Miss My Fashion</title>
+    <title>JEANS - U Miss My Fashion</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        nav ul { list-style: none; display: flex; gap: 20px; }
-        nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
-        nav ul li a:hover { color: #ffca85 !important; }
-        
-        #cart-count { background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 7px; font-size: 11px; position: absolute; top: -8px; right: -10px; font-weight: bold; border: 2px solid #000000; display: none; }
-        .nav-cart-link { position: relative; display: inline-block; cursor: pointer; }
+        /* จัดการ Header ให้มีค่า z-index สูงที่สุดเพื่อให้อยู่เหนือ Search */
+        .main-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 20000; 
+            background: #000; 
+        }
 
-        /* Side Cart Styles */
-        .side-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1001; transition: 0.4s; display: flex; flex-direction: column; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: #FFFFFF !important;
+            font-weight: bold !important;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffca85 !important;
+        }
+        
+        #cart-count {
+            background: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 11px;
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            font-weight: bold;
+            border: 2px solid #000000;
+            display: none; 
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-cart-link {
+            position: relative;
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Side Cart CSS */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 20001;
+        }
+        .side-cart {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 20002;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            color: #000;
+        }
         .side-cart.active { right: 0; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; display: none; }
-        .cart-overlay.active { display: block; }
-        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #000; color: #fff; }
-        .cart-items { flex: 1; overflow-y: auto; padding: 15px; }
-        .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #f9f9f9; }
-        .cart-total { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-bottom: 15px; color: #000; }
-        .view-cart-btn, .line-btn { display: block; text-align: center; padding: 12px; margin-bottom: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+        .view-cart-btn, .checkout-btn {
+            width: 100%; padding: 12px; display: block; text-align: center; 
+            text-decoration: none; font-weight: bold; border: none; cursor: pointer; margin-bottom: 10px;
+        }
         .view-cart-btn { background: #000; color: #fff; }
-        .line-btn { background: #06c755; color: #fff; }
+        .checkout-btn { background: #eb681c; color: #fff; }
+
+        /* --- SEARCH OVERLAY CSS --- */
+        .search-overlay {
+            position: fixed; 
+            top: 100%; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: #fff; 
+            z-index: 10005; 
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding-top: 180px; 
+        }
+        .search-overlay.active { top: 0; }
+        .search-container { width: 90%; max-width: 800px; text-align: center; }
+        .search-container h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; color: #000; }
+        .search-container input {
+            width: 100%; border: none; border-bottom: 2px solid #000;
+            padding: 15px; font-size: 28px; text-align: center; outline: none;
+            color: #000;
+        }
+        .close-search { position: absolute; top: 100px; right: 40px; font-size: 40px; cursor: pointer; color: #000; }
+        
+        /* สไตล์สำหรับผลการค้นหา */
+        #searchResults {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 30px;
+            max-height: 45vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: #000;
+            transition: 0.2s;
+        }
+        .search-result-item:hover { background-color: #f9f9f9; }
+        .search-result-item img {
+            width: 60px;
+            height: 70px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 4px;
+        }
+        .search-result-info h4 { margin: 0; font-size: 16px; }
+        .search-result-info p { margin: 5px 0 0; color: #b08d57; font-weight: bold; }
+
+        .products { padding-top: 100px; }
     </style>
 </head>
 <body>
+
+    <div id="searchOverlay" class="search-overlay">
+        <span class="close-search" onclick="closeSearch()">&times;</span>
+        <div class="search-container">
+            <h2>Search for products</h2>
+            <input type="text" id="searchInput" placeholder="Start typing..." onkeyup="liveSearch()" autocomplete="off">
+            <p id="searchStatus" style="margin-top:20px; color:#888;">Start typing to see products you are looking for.</p>
+            
+            <div id="searchResults"></div>
+        </div>
+    </div>
     
-    <header>
-        <h1>UMissMyFashion</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">All Product</a></li> 
-                <li><a href="shirt.html">Streetwear</a></li> 
-                <li><a href="jeans.html">Jeans</a></li> 
-                <li><a href="Luxury.html">Luxury</a></li> 
-                <li>
-                    <a class="nav-cart-link" onclick="toggleCart()">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>UMissMyFashion</h1>
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="products.html">ALL PRODUCT</a></li> 
+                    <li><a href="shirt.html">STREETWEAR </a></li> 
+                    <li><a href="jeans.html">JEANS </a></li> 
+                    <li><a href="Luxury.html">LUXURY</a></li> 
+                    <li><a href="about.html">ABOUT US</a></li> 
+                </ul> 
+            </nav>
+
+            <div class="header-right-icons">
+                <a href="javascript:void(0)" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="javascript:void(0)" class="nav-cart-link" onclick="openCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="acc.html"><i class="fa-regular fa-user"></i></a>
+            </div>
+        </div>
     </header>
 
     <section class="products">
         <div class="container">
-           <h2 style="text-align: center; margin: 30px 0;">U MISS MY FASHION</h2>
+            <h2 style="text-align: center; margin: 30px 0; font-family: serif; letter-spacing: 2px;">U MISS MY FASHION</h2>
             
-            <div class="product-grid">
-                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Studios Baggy Fit Jeans</h3><p>ราคาประมาณ: 18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Studios Loose Fit Jeans</h3><p>ราคาประมาณ: 22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Mid-Rise Jeans</h3><p>ราคาประมาณ: 38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Anagram Barrel Jeans</h3><p>ราคาประมาณ: 34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>ราคาประมาณ: 36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan Flared Jeans</h3><p>ราคาประมาณ: 35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J7.jpg"><h3>Saint Laurent Distressed Skinny</h3><p>ราคาประมาณ: 24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Jeans Blue</h3><p>ราคาประมาณ: 85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Studios White Green</h3><p>ราคาประมาณ: 16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Studios Mid Blue Auz</h3><p>ราคาประมาณ: 15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>฿19,800</p><a href="product-detail.html?id=J011" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Men Denim</h3><p>฿32,000</p><a href="product-detail.html?id=J012" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstructed</h3><p>฿38,000</p><a href="product-detail.html?id=J013" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J14.jpg"><h3>Loewe SS22 Women</h3><p>฿29,000</p><a href="product-detail.html?id=J014" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J15.jpg"><h3>LV SS23 Men</h3><p>฿45,000</p><a href="product-detail.html?id=J015" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J16.jpg"><h3>Celine Kitty Pismo</h3><p>฿39,000</p><a href="product-detail.html?id=J016" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J17.jpg"><h3>BV Belted Wide-Leg</h3><p>฿42,000</p><a href="product-detail.html?id=J017" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J18.jpg"><h3>SS24 Women Dark Blue</h3><p>฿26,000</p><a href="product-detail.html?id=J018" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J19.jpg"><h3>Acne Cut Off</h3><p>฿17,000</p><a href="product-detail.html?id=J019" class="btn-product">ดูรายละเอียด</a></div>
-                <div class="product-item"><img src="images/J20.jpg"><h3>Chanel Luxury Blue</h3><p>฿88,000</p><a href="product-detail.html?id=J020" class="btn-product">ดูรายละเอียด</a></div>
+            <div class="product-grid" id="jeansProductGrid">
+                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Studios Baggy Fit Jeans</h3><p>ราคา: 18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Studios Loose Fit Jeans</h3><p>ราคา: 22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Mid-Rise Jeans</h3><p>ราคา: 38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Anagram Barrel Jeans</h3><p>ราคา: 34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>ราคา: 36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan Flared Jeans</h3><p>ราคา: 35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J7.jpg"><h3>Saint Laurent Distressed</h3><p>ราคา: 24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Jeans Blue</h3><p>ราคา: 85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Studios White Green</h3><p>ราคา: 16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Studios Mid Blue Auz</h3><p>ราคา: 15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>ราคา: 19,800 บาท</p><a href="product-detail.html?id=J011" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Men Denim</h3><p>ราคา: 32,000 บาท</p><a href="product-detail.html?id=J012" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstructed</h3><p>ราคา: 38,000 บาท</p><a href="product-detail.html?id=J013" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J14.jpg"><h3>Loewe SS22 Women</h3><p>ราคา: 29,000 บาท</p><a href="product-detail.html?id=J014" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J15.jpg"><h3>LV SS23 Men</h3><p>ราคา: 45,000 บาท</p><a href="product-detail.html?id=J015" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J16.jpg"><h3>Celine Kitty Pismo</h3><p>ราคา: 39,000 บาท</p><a href="product-detail.html?id=J016" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J17.jpg"><h3>BV Belted Wide-Leg</h3><p>ราคา: 42,000 บาท</p><a href="product-detail.html?id=J017" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J18.jpg"><h3>SS24 Women Dark Blue</h3><p>ราคา: 26,000 บาท</p><a href="product-detail.html?id=J018" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J19.jpg"><h3>Acne Cut Off</h3><p>ราคา: 17,000 บาท</p><a href="product-detail.html?id=J019" class="btn-product">ดูรายละเอียด</a></div>
+                <div class="product-item"><img src="images/J20.jpg"><h3>Chanel Luxury Blue</h3><p>ราคา: 88,000 บาท</p><a href="product-detail.html?id=J020" class="btn-product">ดูรายละเอียด</a></div>
             </div>
         </div>
-    </section>  
+    </section>
 
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="side-cart" id="sideCart">
         <div class="cart-header">
-            <h3>ตะกร้าสินค้า</h3>
-            <span style="cursor:pointer" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></span>
+            <h3>Shopping Cart</h3>
+            <span style="cursor:pointer; font-size: 24px;" onclick="closeCart()">&times;</span>
         </div>
-        <div class="cart-items" id="cartItemsList"></div>
+        <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
-            <div class="cart-total"><span>รวม:</span><span id="cartTotalAmount">฿0</span></div>
-            <a href="cart.html" class="view-cart-btn">ดูตะกร้าสินค้า</a>
-            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="line-btn"><i class="fa-brands fa-line"></i> สั่งซื้อทาง LINE</a>
+            <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:15px;">
+                <span>รวมทั้งหมด:</span>
+                <span id="cartTotalAmount">฿0</span>
+            </div>
+            <a href="cart.html" class="view-cart-btn">ดูหน้าตะกร้าสินค้า</a>
+            <a href="checkout.html" class="checkout-btn">สั่งซื้อและชำระเงิน</a>
         </div>
     </div>
 
     <div class="contact-wrapper">
         <div class="social-popups" id="socialPopups">
-            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.instagram.com/r1ckyloso/" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
         </div>
         <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
@@ -103,45 +245,121 @@
         </div>
     </div>
 
-    <footer><div class="container"><p>LINE ID: @umissmyfashion</p></div></footer>
+    <footer style="background:#000; color:#fff; padding: 40px 0; margin-top: 50px;">
+        <div class="container" style="text-align: center;">
+            <p>© 2026 U Miss My Fashion</p>
+        </div>
+    </footer>
 
     <script>
-        function toggleCart() {
-            document.getElementById('sideCart').classList.toggle('active');
-            document.getElementById('cartOverlay').classList.toggle('active');
+        const STORAGE_KEY = 'cart';
+
+        // --- Search Overlay Logic ---
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
+        }
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.getElementById('searchInput').value = "";
+            document.getElementById('searchResults').innerHTML = "";
+            document.getElementById('searchStatus').innerText = "What are you looking for today?";
+        }
+
+        function liveSearch() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let status = document.getElementById('searchStatus');
+            let resultContainer = document.getElementById('searchResults');
+            
+            let products = document.querySelectorAll('.product-item');
+            let foundCount = 0;
+            resultContainer.innerHTML = ""; 
+
+            if (input.trim() === "") {
+                status.innerText = "What are you looking for today?";
+                return;
+            }
+
+            products.forEach(item => {
+                let name = item.querySelector('h3').innerText;
+                let price = item.querySelector('p').innerText;
+                let img = item.querySelector('img').src;
+                let link = item.querySelector('a').href;
+
+                if (name.toLowerCase().includes(input)) {
+                    foundCount++;
+                    resultContainer.innerHTML += `
+                        <a href="${link}" class="search-result-item">
+                            <img src="${img}">
+                            <div class="search-result-info">
+                                <h4>${name}</h4>
+                                <p>${price}</p>
+                            </div>
+                        </a>
+                    `;
+                }
+            });
+
+            status.innerText = foundCount > 0 ? `Found ${foundCount} products for '${input}'` : "No products found.";
+        }
+
+        // --- Cart Logic ---
+        function openCart() {
+            document.getElementById('sideCart').classList.add('active');
+            document.getElementById('cartOverlay').style.display = 'block';
             renderSideCart();
+        }
+        function closeCart() {
+            document.getElementById('sideCart').classList.remove('active');
+            document.getElementById('cartOverlay').style.display = 'none';
+        }
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const badge = document.getElementById('cart-count');
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (badge) {
+                badge.textContent = total;
+                badge.style.display = total > 0 ? 'flex' : 'none';
+            }
         }
 
         function renderSideCart() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const list = document.getElementById('cartItemsList');
-            const totalEl = document.getElementById('cartTotalAmount');
-            if(cart.length === 0) { list.innerHTML = '<p style="text-align:center;margin-top:20px;">ตะกร้าว่างเปล่า</p>'; totalEl.innerText = '฿0'; return; }
+            const container = document.getElementById('cartItems');
+            const totalDisplay = document.getElementById('cartTotalAmount');
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; margin-top:20px; color:#888;">ตะกร้าของคุณยังว่างเปล่า</p>';
+                totalDisplay.innerText = '฿0';
+                updateCartBadge();
+                return;
+            }
+
+            let html = '';
             let total = 0;
-            list.innerHTML = cart.map((item, i) => {
+            cart.forEach((item, index) => {
+                html += `
+                    <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:12px; align-items:center;">
+                        <img src="${item.image}" style="width:50px; height:60px; object-fit:cover; border-radius:4px;">
+                        <div style="flex-grow:1;">
+                            <div style="font-weight:bold; font-size:14px; color: #000;">${item.name}</div>
+                            <div style="color:#b08d57; font-size:13px;">฿${item.price.toLocaleString()} x ${item.quantity}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; font-size:18px;">&times;</button>
+                    </div>`;
                 total += item.price * item.quantity;
-                return `<div style="display:flex;gap:10px;margin-bottom:15px;border-bottom:1px solid #eee;padding-bottom:10px;">
-                    <img src="${item.image}" style="width:50px;height:50px;object-fit:cover;">
-                    <div style="flex:1;"><div style="font-size:13px;font-weight:bold;">${item.name}</div><div style="font-size:12px;">฿${item.price.toLocaleString()} x ${item.quantity}</div></div>
-                    <span onclick="removeFromCart(${i})" style="color:red;cursor:pointer;"><i class="fa-solid fa-trash"></i></span>
-                </div>`;
-            }).join('');
-            totalEl.innerText = `฿${total.toLocaleString()}`;
+            });
+            container.innerHTML = html;
+            totalDisplay.innerText = `฿${total.toLocaleString()}`;
+            updateCartBadge();
         }
 
-        function removeFromCart(i) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(i, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderSideCart(); updateBadge();
-        }
-
-        function updateBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const count = cart.reduce((s, i) => s + i.quantity, 0);
-            const badge = document.getElementById('cart-count');
-            badge.textContent = count;
-            badge.style.display = count > 0 ? 'inline-block' : 'none';
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            cart.splice(index, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+            renderSideCart();
         }
 
         function toggleContact() {
@@ -151,10 +369,10 @@
             const isOpen = popups.style.display === 'flex';
             popups.style.display = isOpen ? 'none' : 'flex';
             icon.className = isOpen ? 'fa-solid fa-comment-dots' : 'fa-solid fa-xmark';
-            if(isOpen) label.classList.remove('hidden'); else label.classList.add('hidden');
+            if(isOpen) label.style.display = 'block'; else label.style.display = 'none';
         }
 
-        document.addEventListener('DOMContentLoaded', updateBadge);
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 </body>
 </html>
