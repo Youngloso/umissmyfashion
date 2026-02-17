@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - U Miss My Fashion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Navigation Styles */
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
+        nav ul li a:hover { color: #ffca85 !important; }
+
+        /* --- Header Fixed & Z-Index --- */
+        .main-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 10001; /* อยู่บนสุดทับหน้า Search */
+            background: #000;
+        }
+
+        /* Cart Badge Styles */
+        .nav-cart-link { position: relative; text-decoration: none; color: white; cursor: pointer; }
+        #cart-count { 
+            background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 6px; 
+            font-size: 10px; position: absolute; top: -12px; right: -10px; 
+            border: 2px solid #000; display: none;
+        }
+
+        /* --- SIDE CART CSS --- */
+        .side-cart {
+            position: fixed; top: 0; right: -400px;
+            width: 350px; height: 100%; background: #fff; z-index: 10005;
+            transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column;
+        }
+        .side-cart.active { right: 0; }
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 10004; display: none;
+        }
+        .cart-header { padding: 20px; background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; color: #333; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #f9f9f9; }
+        .view-cart-btn, .checkout-btn {
+            display: block; width: 100%; text-align: center; padding: 12px;
+            text-decoration: none; font-weight: bold; margin-bottom: 10px; border-radius: 4px;
+        }
+        .view-cart-btn { background: #000000; color: #ffffff; }
+        .checkout-btn { background: #eb681c; color: #fff; }
+
+        /* --- SEARCH OVERLAY (Slide Up) --- */
+        .search-overlay {
+            position: fixed;
+            top: 100%; left: 0; width: 100%; height: 100%;
+            background-color: #fff;
+            z-index: 10000; /* อยู่ใต้ Header */
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; flex-direction: column; align-items: center;
+            padding-top: 150px;
+        }
+        .search-overlay.active { top: 0; }
+        .search-container { width: 90%; max-width: 800px; text-align: center; }
+        .search-container input {
+            width: 100%; border: none; border-bottom: 2px solid #000;
+            padding: 15px; font-size: 28px; text-align: center; outline: none;
+        }
+        .close-search { position: absolute; top: 100px; right: 40px; font-size: 40px; cursor: pointer; color: #000; }
+
+        /* --- About Section Styles --- */
+        .about-header { text-align: center; padding: 120px 20px 60px; background: #f9f9f9; }
+        .about-header h1 { font-size: 45px; letter-spacing: 4px; margin: 0; text-transform: uppercase; font-weight: 800; }
+        .team-container {
+            max-width: 1100px; margin: 60px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 30px; align-items: end;
+        }
+        .team-member { text-align: center; transition: transform 0.4s; }
+        .team-member:hover { transform: translateY(-10px); }
+        .team-member img {
+            width: 100%; height: auto; border-radius: 10px; 
+            transition: 0.5s; box-shadow: 0 10px 30px rgba(0,0,0,0.1); object-fit: cover;
+        }
+        .member-1 { order: 1; }
+        .leader { order: 2; transform: scale(1.05); } 
+        .member-3 { order: 3; }
+        .team-info { margin-top: 20px; }
+        .team-info h3 { margin: 10px 0 5px; font-size: 22px; font-weight: 700; }
+        .team-info p { color: #b08d57; font-weight: bold; margin: 0; text-transform: uppercase; font-size: 14px; }
+        .story-section { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
+
+        /* Contact Styles */
+        .contact-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+        .social-popups { display: none; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+
+        @media (max-width: 768px) {
+            .team-container { grid-template-columns: 1fr; }
+            .leader { order: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+  <div id="searchOverlay" class="search-overlay">
+        <span class="close-search" onclick="closeSearch()">&times;</span>
+        <div class="search-container">
+            <h2>Search for products</h2>
+            <input type="text" id="searchInput" placeholder="Start typing..." onkeyup="liveSearch()" autocomplete="off">
+            <p id="searchStatus" style="margin-top:20px; color:#888;">Start typing to see products you are looking for.</p>
+            
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo"><h1>UMissMyFashion</h1></div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="products.html">ALL PRODUCT</a></li>
+                    <li><a href="shirt.html">STREETWEAR</a></li>
+                    <li><a href="jeans.html">JEANS</a></li>
+                    <li><a href="Luxury.html">LUXURY</a></li>
+                    <li><a href="about.html" style="color: #ffca85 !important;">ABOUT US</a></li>
+                </ul>
+            </nav>
+            <div class="header-right-icons">
+                <a href="javascript:void(0)" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="javascript:void(0)" class="nav-cart-link" onclick="openCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fa-regular fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="about-header">
+        <h1>Our Team</h1>
+    </section>
+
+    <div class="team-container">
+        <div class="team-member member-1">
+            <img src="images/m2.jpg" alt="Member 1">
+            <div class="team-info">
+                <h3>SUPANAT</h3>
+                <p>Designer</p>
+            </div>
+        </div>
+        <div class="team-member leader">
+            <img src="images/m1.jpg" alt="Leader">
+            <div class="team-info">
+                <h3>NATTHARAT</h3>
+                <p>Young Ceo</p>
+            </div>
+        </div>
+        <div class="team-member member-3">
+            <img src="images/m3.jpg" alt="Member 3">
+            <div class="team-info">
+                <h3>PIYAPORN</h3>
+                <p>Manager</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="story-section">
+        <div class="story-content">
+            <p>© 2026 U Miss My Fashion </p>
+        </div>
+    </section>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="side-cart" id="sideCart">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span style="cursor:pointer; font-size: 20px;" onclick="closeCart()">&times; Close</span>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:15px; color:#000;">
+                <span>รวมทั้งหมด:</span><span id="cartTotalAmount">฿0</span>
+            </div>
+            <a href="cart.html" class="view-cart-btn">ดูหน้าตะกร้าสินค้า</a>
+            <a href="checkout.html" class="checkout-btn">สั่งซื้อและชำระเงิน</a>
+        </div>
+    </div>
+
+    <div class="contact-wrapper">
+        <div class="social-popups" id="socialPopups">
+            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
+        </div>
+        <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
+            <span class="contact-label" id="contactLabel" style="margin-right:10px; font-weight:bold;">Contact us</span>
+            <div class="main-contact-btn" style="background:#000; color:#fff; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;">
+                <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Search Functions ---
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
+        }
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('searchInput').value = "";
+        }
+        function liveSearch() {
+            // หน้า About Us ปกติจะไม่มีสินค้าให้กรอง ถ้าต้องการให้ค้นหาได้ต้องมีกริลสินค้าในหน้านี้ด้วย
+            let input = document.getElementById('searchInput').value;
+            let status = document.getElementById('searchStatus');
+            status.innerText = input === "" ? "Search for products..." : "Redirecting to products page for '" + input + "'...";
+            // เพิ่มเติม: สามารถเขียนโค้ดให้กด Enter แล้วเด้งไปหน้า products.html?search=... ได้
+        }
+
+        // --- Cart Functions ---
+        const STORAGE_KEY = 'cart';
+        function openCart() {
+            document.getElementById('sideCart').classList.add('active');
+            document.getElementById('cartOverlay').style.display = 'block';
+            renderSideCart();
+        }
+        function closeCart() {
+            document.getElementById('sideCart').classList.remove('active');
+            document.getElementById('cartOverlay').style.display = 'none';
+        }
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const badge = document.getElementById('cart-count');
+            const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+            if (badge) {
+                badge.textContent = totalQty;
+                badge.style.display = totalQty > 0 ? 'inline-block' : 'none';
+            }
+        }
+        function renderSideCart() {
+            const container = document.getElementById('cartItems');
+            const totalDisplay = document.getElementById('cartTotalAmount');
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; margin-top:50px; color:#888;">ไม่มีสินค้าในตะกร้า</p>';
+                totalDisplay.innerText = '฿0';
+                return;
+            }
+            let html = ''; let total = 0;
+            cart.forEach((item, index) => {
+                html += `
+                <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:12px; align-items:center;">
+                    <img src="${item.image}" style="width:60px; height:75px; object-fit:cover; border-radius:4px;">
+                    <div style="flex:1; color:#000;">
+                        <div style="font-weight:bold;">${item.name}</div>
+                        <div style="font-size:13px;">฿${item.price.toLocaleString()} x ${item.quantity}</div>
+                    </div>
+                </div>`;
+                total += item.price * item.quantity;
+            });
+            container.innerHTML = html;
+            totalDisplay.innerText = `฿${total.toLocaleString()}`;
+        }
+
+        // --- Contact Functions ---
+        function toggleContact() {
+            const popups = document.getElementById('socialPopups');
+            const icon = document.getElementById('contactIcon');
+            const label = document.getElementById('contactLabel');
+            if (popups.style.display === 'flex') {
+                popups.style.display = 'none';
+                icon.className = 'fa-solid fa-comment-dots';
+                label.style.display = 'block';
+            } else {
+                popups.style.display = 'flex';
+                icon.className = 'fa-solid fa-xmark';
+                label.style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+</body>
+</html>
