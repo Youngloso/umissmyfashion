@@ -7,64 +7,171 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        nav ul {
-            list-style: none;
+         /* Navigation Styles */
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
+        nav ul li a:hover { color: #ffca85 !important; }
+
+        /* --- ปรับแต่ง Header ให้ลอยอยู่บนสุดเสมอ --- */
+        .main-header {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10001; 
+            background: #000; 
+        }
+
+        /* Cart Badge Styles */
+        .nav-cart-link { position: relative; text-decoration: none; color: white; cursor: pointer; }
+        #cart-count { 
+            background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 6px; 
+            font-size: 10px; position: absolute; top: -12px; right: -10px; 
+            border: 2px solid #000; display: none;
+        }
+
+        /* --- SIDE CART CSS --- */
+        .side-cart {
+            position: fixed; top: 0; right: -400px;
+            width: 350px; height: 100%; background: #fff; z-index: 10002;
+            transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column;
+        }
+        .side-cart.active { right: 0; }
+
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 9999; display: none;
+        }
+
+        .cart-header { padding: 20px; background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+        .close-btn { cursor: pointer; font-size: 14px; opacity: 0.8; }
+        
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; color: #333; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #f9f9f9; }
+        .cart-total { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #000; }
+        
+        .view-cart-btn, .checkout-btn {
+            display: block; width: 100%; text-align: center; padding: 12px;
+            text-decoration: none; font-weight: bold; margin-bottom: 10px; border-radius: 4px;
+        }
+        .view-cart-btn { background: #000000; color: #ffffff; }
+        .checkout-btn { background: #eb681c; color: #fff; }
+
+        .hero-content h2 {
+            font-family: 'Inter', 'Kanit', 'Arial', sans-serif !important;
+            font-size: 50px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 10px; color: #FFFFFF;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        .hero-content p { font-family: 'Kanit', sans-serif; font-size: 20px; margin-bottom: 20px; }
+
+        /* --- ระบบ SEARCH เพิ่มใหม่ --- */
+        .search-overlay {
+            position: fixed;
+            top: 100%; 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 10000; 
+            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 150px; 
         }
-        nav ul li a {
-            color: #FFFFFF !important;
-            font-weight: bold !important;
+        .search-overlay.active { top: 0; }
+
+        .search-container { width: 90%; max-width: 800px; text-align: center; }
+        .search-container h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; }
+        .search-container input {
+            width: 100%; border: none; border-bottom: 2px solid #000;
+            padding: 15px; font-size: 28px; text-align: center; outline: none;
+            font-family: 'Kanit', sans-serif;
+        }
+        .close-search {
+            position: absolute; top: 100px; right: 40px;
+            font-size: 40px; cursor: pointer; color: #000;
+        }
+
+        /* --- NEW: กล่องแสดงผลการค้นหา --- */
+        #searchResults {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
             text-decoration: none;
-            font-size: 18px;
+            color: #000;
+            border-bottom: 1px solid #eee;
             transition: 0.3s;
+            text-align: left;
         }
-        nav ul li a:hover {
-            color: #ffca85 !important;
+
+        .search-item:hover { background: #f8f8f8; }
+
+        .search-item img {
+            width: 50px;
+            height: 65px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 4px;
         }
-        #cart-count {
-            background: #ff4d4d;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 11px;
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            font-weight: bold;
-            border: 2px solid #000000;
-            display: none;
-        }
-        .nav-cart-link {
-            position: relative;
-            display: inline-block;
-        }
+
+        .search-item-info h4 { margin: 0; font-size: 16px; font-weight: bold; }
+        .search-item-info p { margin: 5px 0 0; color: #b08d57; font-size: 14px; }
     </style>
 </head>
 <body>
     
-    <header>
-        <h1>UMissMyFashion</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">All Product</a></li> 
-                <li><a href="shirt.html">Streetwear</a></li> 
-                <li><a href="jeans.html">Jeans</a></li> 
-                <li><a href="Luxury.html">Luxury</a></li> 
-                <li>
-                    <a href="javascript:void(0)" onclick="openCart()" class="nav-cart-link">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div id="searchOverlay" class="search-overlay">
+        <span class="close-search" onclick="closeSearch()">&times;</span>
+        <div class="search-container">
+            <h2>Search for products</h2>
+            <input type="text" id="searchInput" placeholder="Start typing..." onkeyup="liveSearch()" autocomplete="off">
+            <p id="searchStatus" style="margin-top:20px; color:#888;">Start typing to see products you are looking for.</p>
+            
+            <div id="searchResults"></div>
+        </div>
+    </div>
 
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo"><h1>UMissMyFashion</h1></div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="products.html">ALL PRODUCT</a></li> 
+                    <li><a href="shirt.html">STREETWEAR </a></li> 
+                    <li><a href="jeans.html">JEANS </a></li> 
+                    <li><a href="Luxury.html">LUXURY</a></li> 
+                    <li><a href="about.html">ABOUT US</a></li> 
+                </ul> 
+            </nav>
+            <div class="header-right-icons">
+                <a href="javascript:void(0)" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="javascript:void(0)" class="nav-cart-link" onclick="openCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fa-regular fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+    
     <section class="products">
         <div class="container">
-            <h2 style="text-align: center; margin: 30px 0;">U MISS MY FASHION</h2>
+            <h2 style="text-align: center; margin: 30px 0; font-family: serif;">U MISS MY FASHION</h2>
             <div class="product-grid">
                 <div class="product-item"><img src="images/p1black.jpg"><h3>Fear of God Essentials</h3><p>2,675 บาท</p><a href="product-detail.html?id=P001" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/J1.jpg"><h3>Acne Baggy 1981M</h3><p>18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">รายละเอียด</a></div>
@@ -116,7 +223,7 @@
                 <div class="product-item"><img src="images/p12black.jpg"><h3>Lifework Silket</h3><p>1,400 บาท</p><a href="product-detail.html?id=P012" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/L4.jpg"><h3>Coach Cow Belts</h3><p>3,200 บาท</p><a href="product-detail.html?id=L4" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstruct</h3><p>38,000 บาท</p><a href="product-detail.html?id=J013" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p7black.jpg"><h3>Mardi Sweatshirt</h3><p>2,400 บาท</p><a href="product-detail.html?id=P007" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p7black.jpg"><h3>Mardi Mercredi Sweat</h3><p>2,400 บาท</p><a href="product-detail.html?id=P007" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/L13.jpg"><h3>Vivienne Relief</h3><p>8,900 บาท</p><a href="product-detail.html?id=L13" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/J9.jpg"><h3>Acne Relaxed W/G</h3><p>16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">รายละเอียด</a></div>
                 <div class="product-item"><img src="images/p18white.jpg"><h3>Marithe Baseball</h3><p>2,400 บาท</p><a href="product-detail.html?id=P018" class="btn-product">รายละเอียด</a></div>
@@ -127,35 +234,10 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>ติดต่อด่วน: LINE ID: @umissmyfashion</p>
-        </div>
-    </footer>
-    <script>
+    <footer><div class="container"><p>© 2026 U Miss My Fashion</p></div></footer>
 
-        // ฟังก์ชันอัปเดตตัวเลขตะกร้า
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-            const badge = document.getElementById('cart-count');
-            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-            
-            if(total > 0) {
-                badge.textContent = total;
-                badge.style.display = 'inline-block';
-            } else {
-                badge.style.display = 'none';
-            }
-        }
-
-        // เรียกใช้งานเมื่อโหลดหน้าเสร็จ
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
-    </script>
-
-    
-     
     <div class="contact-wrapper">
-        <div class="social-popups" id="socialPopups">
+        <div class="social-popups" id="socialPopups" style="display: none; flex-direction: column; gap: 10px; margin-bottom: 15px;">
             <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
         </div>
@@ -167,58 +249,90 @@
 
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="side-cart" id="sideCart">
-        <div class="cart-header">
-            <h3>Shopping Cart</h3>
-            <span class="close-btn" onclick="closeCart()">&times; Close</span>
-        </div>
+        <div class="cart-header"><h3>Shopping Cart</h3><span class="close-btn" onclick="closeCart()">&times; Close</span></div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <span>รวมทั้งหมด:</span>
-                <span id="cartTotalAmount">฿0</span>
-            </div>
+            <div class="cart-total"><span>รวมทั้งหมด:</span><span id="cartTotalAmount">฿0</span></div>
             <a href="cart.html" class="view-cart-btn">ดูหน้าตะกร้าสินค้า</a>
-            <button class="checkout-btn" onclick="window.location.href='https://line.me/ti/p/@umissmyfashion'">สั่งซื้อและชำระเงิน</button>
+            <a href="checkout.html" class="checkout-btn">สั่งซื้อและชำระเงิน</a>
         </div>
     </div>
 
+    <script src="products-data.js"></script>
+
     <script>
-        // 1. จัดการตะกร้า (Open/Close/Render)
+        const STORAGE_KEY = 'cart';
+
+        /* --- SEARCH FUNCTIONS --- */
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+            setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
+        }
+
+        function closeSearch() {
+            document.getElementById('searchOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            document.getElementById('searchInput').value = "";
+            document.getElementById('searchResults').innerHTML = "";
+            document.getElementById('searchStatus').innerText = "เริ่มพิมพ์เพื่อค้นหาสินค้าได้เลย";
+        }
+
+        function liveSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const resultContainer = document.getElementById('searchResults');
+            const status = document.getElementById('searchStatus');
+            resultContainer.innerHTML = ""; 
+            if (input.trim() === "") {
+                status.innerText = "เริ่มพิมพ์เพื่อค้นหาสินค้าได้เลย";
+                return;
+            }
+            // กรองข้อมูลจาก allProducts ที่อยู่ในไฟล์ products-data.js
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(input));
+            if (filtered.length > 0) {
+                status.innerText = `เจอสินค้า ${filtered.length} รายการ`;
+                filtered.forEach(product => {
+                    resultContainer.innerHTML += `
+                        <a href="${product.link}" class="search-item">
+                            <img src="${product.image}">
+                            <div class="search-item-info">
+                                <h4>${product.name}</h4>
+                                <p>฿${product.price.toLocaleString()}</p>
+                            </div>
+                        </a>`;
+                });
+            } else {
+                status.innerText = "ไม่พบสินค้าที่ค้นหา";
+            }
+        }
+
+        /* --- CART & UI FUNCTIONS --- */
         function openCart() {
             document.getElementById('sideCart').classList.add('active');
             document.getElementById('cartOverlay').style.display = 'block';
             renderSideCart();
         }
-
         function closeCart() {
             document.getElementById('sideCart').classList.remove('active');
             document.getElementById('cartOverlay').style.display = 'none';
         }
-
         function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             const badge = document.getElementById('cart-count');
             const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-            if (badge) {
-                badge.textContent = total;
-                badge.style.display = total > 0 ? 'inline-block' : 'none';
-            }
+            if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'inline-block' : 'none'; }
         }
-
         function renderSideCart() {
             const container = document.getElementById('cartItems');
             const totalDisplay = document.getElementById('cartTotalAmount');
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
+            const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align:center; margin-top:20px;">ตะกร้าของคุณยังว่างเปล่า</p>';
+                container.innerHTML = '<p style="text-align:center; margin-top:20px;">ตะกร้ายังว่างเปล่า</p>';
                 totalDisplay.innerText = '฿0';
                 updateCartBadge();
                 return;
             }
-
-            let html = '';
-            let total = 0;
+            let html = ''; let total = 0;
             cart.forEach((item, index) => {
                 html += `
                     <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:12px; align-items:center;">
@@ -235,15 +349,12 @@
             totalDisplay.innerText = `฿${total.toLocaleString()}`;
             updateCartBadge();
         }
-
         function removeFromCart(index) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
             renderSideCart();
         }
-
-        // 2. ปุ่ม Contact
         function toggleContact() {
             const popups = document.getElementById('socialPopups');
             const icon = document.getElementById('contactIcon');
@@ -258,7 +369,6 @@
                 label.style.display = 'none';
             }
         }
-
         document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 </body>
