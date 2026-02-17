@@ -16,54 +16,86 @@
     box-sizing: border-box;
 }
 
-/* 2. กำหนดฟอนต์พื้นฐาน */
+/* =================================== */
+/* 1. ฟอนต์และค่าพื้นฐาน */
+/* =================================== */
+@font-face {
+    font-family: 'UMMF-DeutschGothic';
+    src: url('fonts/Deutsch.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4; 
-    display: flex; /* สำหรับ Sticky Footer */
-    flex-direction: column; /* สำหรับ Sticky Footer */
-    min-height: 100vh; /* สำหรับ Sticky Footer */
-}
-html {
-    height: 100%; /* สำหรับ Sticky Footer */
-}
-
-/* 3. ทำให้ Section เนื้อหาหลักยืดออก (สำหรับ Sticky Footer) */
-section {
-    flex-grow: 1; 
+    font-family: 'Inter', 'Arial', sans-serif;
+    background-color: #f9f9f9; /* สีเทาอ่อนๆ ให้ดูแพง */
+    color: #333;
+    line-height: 1.6;
 }
 
 /* =================================== */
-/* โค้ดสำหรับ Header */
+/* 2. Header (Rundown Style) - สวยแล้วคงไว้ */
 /* =================================== */
-header {
-    background-color: #000000;
-    color: white;
-    padding: 20px 40px; 
+.main-header {
+    background-color: #000000 !important;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-/* *** โค้ด font  *** */
-header h1 {
-    font-family: 'UMMF-DeutschGothic', serif; 
-    font-size: 2.5em; 
-    color: white; 
+    padding: 0 40px;
+    position: relative; /* สำคัญ: เพื่อให้ Nav อ้างอิงจุดกึ่งกลางได้ */
 }
 
-nav ul {
-    list-style: none;
+/* ปรับให้ Logo มีความกว้างคงที่ (ช่วยเรื่อง Balance) */
+header .logo {
+    flex: 1; /* กินพื้นที่ฝั่งซ้าย */
     display: flex;
+    justify-content: flex-start;
 }
-nav li a {
-    color: white;
+
+header h1 {
+    font-family: 'UMMF-DeutschGothic', serif; 
+    font-size: 2.2em; 
+    color: white !important;
+}
+
+.nav-menu ul {
+    position: absolute;
+    left: 50%;
+    top: 50%; /* ดึงลงมาที่กึ่งกลางของ Header */
+    transform: translate(-50%, -50%); /* ย้ายกึ่งกลางตัวมันเองให้ตรงกับจุดกึ่งกลาง Header */
+    white-space: nowrap;
+    z-index: 10;
+    display: flex; /* ตรวจสอบว่ามี display: flex เพื่อให้เมนูเรียงแนวนอน */
+    list-style: none;
+    gap: 30px; /* เพิ่มระยะห่างระหว่างเมนูแต่ละตัว */
+}
+
+.nav-menu li a {
+    color: white !important;
     text-decoration: none;
-    padding: 0 15px;
-    font-size: 1.1em;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
-nav li a:hover {
-    color: #e0ac5b;
-}
+
+.nav-menu li a:hover { color: #ff9c40 !important; }
+
+.header-right-icons { display: flex; align-items: center; gap: 20px; }
+.header-right-icons a { color: rgb(255, 255, 255) !important; text-decoration: none; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+#cart-count, .badge { background: #ff4d4d !important; color: white !important; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
+
 
 /* =================================== */
 /*         (Hero Section)              */
@@ -193,7 +225,7 @@ nav li a:hover {
 /* โค้ดสำหรับ Footer */
 /* =================================== */
 footer {
-    background-color: #333;
+    background-color: #000000;
     color: white;
     text-align: center; 
     padding: 20px 40px; 
@@ -554,4 +586,38 @@ footer p {
 
 /* โค้ดใหม่*/
 
+/* =================================== */
+/* ส่วนแก้ไขตำแหน่งตะกร้า (วางทับท้ายไฟล์) */
+/* =================================== */
 
+/* 1. เพิ่มระยะห่างระหว่างไอคอนให้ไม่เบียดกัน */
+.header-right-icons { 
+    display: flex !important; 
+    gap: 25px !important; 
+}
+
+/* 2. ตั้งค่าให้ Badge เลขแดงลอยทับตะกร้าได้เป๊ะขึ้น */
+.header-right-icons a { 
+    position: relative !important; 
+    display: flex !important;
+}
+
+#cart-count {
+    /* บังคับตำแหน่งใหม่ให้ขยับออกไปทางขวาบน */
+    position: absolute !important;
+    top: -8px !important;    
+    right: -12px !important;  
+    
+    /* จัดทรงวงกลมให้สวย (ถ้ามันเบี้ยว) */
+    background: #ff4d4d !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+    border: 2px solid #000 !important;
+    padding: 0 !important;
+    z-index: 10 !important;
+}
