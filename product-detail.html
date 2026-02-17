@@ -12,36 +12,79 @@
         nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
         nav ul li a:hover { color: #ffca85 !important; }
         
+        /* --- Header ลอยอยู่บนสุด --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10001;
+            background: #000;
+        }
+
         #cart-count {
             background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 6px;
             font-size: 11px; position: absolute; top: -8px; right: -10px;
             font-weight: bold; border: 2px solid #000; display: none;
         }
 
-        .cart-sidebar {
-            position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
-            background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            z-index: 1001; transition: 0.4s ease; display: flex; flex-direction: column;
-            color: #000;
+        /* --- SIDE CART CSS (ปรับให้เหมือน Index) --- */
+        .side-cart {
+            position: fixed; top: 0; right: -400px;
+            width: 350px; height: 100%; background: #fff; z-index: 10002;
+            transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column;
         }
-        .cart-sidebar.active { right: 0; }
-        .cart-header { padding: 20px; background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; }
-        .cart-header h3 { margin: 0; font-size: 1.2rem; }
-        .close-cart { cursor: pointer; font-size: 1.2rem; }
-        .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
-        .cart-item { display: flex; gap: 15px; margin-bottom: 20px; position: relative; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .cart-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; }
-        .cart-item-details { flex: 1; }
-        .cart-item-details h4 { margin: 0 0 5px; font-size: 0.9rem; padding-right: 20px; }
-        .cart-item-details p { margin: 0; font-size: 0.85rem; color: #b08d57; }
-        .remove-item { position: absolute; top: 0; right: 0; color: #ff4d4d; cursor: pointer; font-size: 1rem; }
-        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-        .total-box { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; font-size: 1.1rem; }
-        .btn-view-cart { width: 100%; background: #000; color: #fff; border: none; padding: 12px; cursor: pointer; font-weight: bold; margin-bottom: 10px; text-decoration: none; display: block; text-align: center; }
-        .btn-line-order { width: 100%; background: #28a745; color: #fff; border: none; padding: 12px; cursor: pointer; font-weight: bold; text-decoration: none; display: block; text-align: center; border-radius: 5px; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 1000; }
+        .side-cart.active { right: 0; }
+
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 9999; display: none;
+        }
         .cart-overlay.active { display: block; }
 
+        .cart-header { padding: 20px; background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; color: #333; }
+        
+        /* สไตล์รายการสินค้าในตะกร้า */
+        .cart-item-row {
+            display: flex; gap: 12px; margin-bottom: 15px; 
+            border-bottom: 1px solid #eee; padding-bottom: 12px; align-items: center;
+        }
+        .cart-item-row img {
+            width: 60px; height: 75px; object-fit: cover; border-radius: 4px;
+        }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-info .name { font-weight: bold; font-size: 14px; color: #000; }
+        .cart-item-info .price { color: #b08d57; font-size: 13px; margin-top: 4px; }
+        .remove-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 20px; }
+
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #f9f9f9; }
+        .total-box { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #000; }
+        
+        .btn-view-cart {
+            display: block; width: 100%; text-align: center; padding: 12px;
+            background: #000; color: #fff; text-decoration: none; 
+            font-weight: bold; margin-bottom: 10px; border-radius: 4px;
+        }
+
+        /* --- ระบบ SEARCH --- */
+        .search-overlay {
+            position: fixed; top: 100%; left: 0; width: 100%; height: 100%;
+            background-color: #fff; z-index: 10000; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex; flex-direction: column; align-items: center; padding-top: 150px;
+        }
+        .search-overlay.active { top: 0; }
+        .search-container { width: 90%; max-width: 800px; text-align: center; }
+        .search-container h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; color: #000; }
+        .search-container input {
+            width: 100%; border: none; border-bottom: 2px solid #000;
+            padding: 15px; font-size: 28px; text-align: center; outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .close-search { position: absolute; top: 100px; right: 40px; font-size: 40px; cursor: pointer; color: #000; }
+
+        .product-detail { margin-top: 100px; }
         .thumb { cursor: pointer; border: 2px solid transparent; width: 60px; height: 60px; object-fit: cover; margin-bottom: 5px; }
         .thumb.active { border-color: #000; }
         .size-btn { padding: 8px 15px; margin-right: 5px; cursor: pointer; border: 1px solid #ccc; background: #fff; transition: 0.2s; }
@@ -50,11 +93,22 @@
 </head>
 <body>
     
+    <div id="searchOverlay" class="search-overlay">
+        <span class="close-search" onclick="closeSearch()">&times;</span>
+        <div class="search-container">
+            <h2>Search for products</h2>
+            <input type="text" id="searchInput" placeholder="Start typing..." onkeyup="liveSearch()" autocomplete="off">
+            <p id="searchStatus" style="margin-top:20px; color:#888;">Start typing to see products you are looking for.</p>
+            
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-    <div class="cart-sidebar" id="cart-sidebar">
+    <div class="side-cart" id="cart-sidebar">
         <div class="cart-header">
             <h3>Shopping Cart</h3>
-            <span class="close-cart" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i> Close</span>
+            <span style="cursor:pointer; font-size: 17px;" onclick="toggleCart()">&times; Close</span>
         </div>
         <div class="cart-items" id="cart-items-list"></div>
         <div class="cart-footer">
@@ -63,27 +117,36 @@
                 <span id="cart-total-price">฿0</span>
             </div>
             <a href="cart.html" class="btn-view-cart">ดูหน้าตะกร้าสินค้า</a>
-            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="btn-line-order">สั่งซื้อผ่าน LINE</a>
+            <a href="checkout.html" class="checkout-btn" style="background: #eb681c; color: #fff; display: block; text-align: center; padding: 12px; text-decoration: none; font-weight: bold; border-radius: 4px;">สั่งซื้อและชำระเงิน</a>
         </div>
     </div>
 
-    <header>
-        <h1>UMissMyFashion</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">All Product</a></li> 
-                <li><a href="shirt.html">Streetwear</a></li> 
-                <li><a href="jeans.html">Jeans</a></li> 
-                <li><a href="Luxury.html">Luxury</a></li> 
-                <li>
-                    <a href="javascript:void(0)" onclick="toggleCart()" style="position: relative;">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <h1>UMissMyFashion</h1>
+            </div>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="products.html">ALL PRODUCT</a></li> 
+                    <li><a href="shirt.html">STREETWEAR </a></li> 
+                    <li><a href="jeans.html">JEANS </a></li> 
+                    <li><a href="Luxury.html">LUXURY</a></li> 
+                    <li><a href="about.html">ABOUT US</a></li> 
+                </ul> 
+            </nav>
+
+            <div class="header-right-icons">
+                <a href="javascript:void(0)" onclick="openSearch()"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="javascript:void(0)" class="nav-cart-link" onclick="toggleCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="login.html"><i class="fa-regular fa-user"></i></a>
+            </div>
+        </div>
     </header>
 
     <section class="product-detail">
@@ -132,8 +195,29 @@
     </section>
 
     <script>
+    function openSearch() {
+        document.getElementById('searchOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+        setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
+    }
+
+    function closeSearch() {
+        document.getElementById('searchOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        document.getElementById('searchInput').value = "";
+    }
+
+    function liveSearch() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let status = document.getElementById('searchStatus');
+        if (input === "") {
+            status.innerText = "Start typing to see products you are looking for.";
+        } else {
+            status.innerText = "Searching for '" + input + "'... (Redirect to products page to see results)";
+        }
+    }
+
     const productData = {
-        // --- Group J: Jeans ---
         "J001": { name: "Acne Studios Baggy Fit Jeans 1981M Mid Blue Wash", description: "กางเกงยีนส์ทรง Baggy Fit ยอดฮิตจาก Acne Studios มาในสี Mid Blue Wash", sizes: ['28', '30', '32', '34', '36'], colors: [{ name: "Mid Blue", img: "images/J1.jpg" }], price: "฿18,500" },
         "J002": { name: "Acne Studios Loose Fit Jeans 1981 Denim", description: "รุ่นพิเศษ Limited Edition ทรง Loose Fit ใส่สบาย เนื้อผ้า Denim คุณภาพสูง", sizes: ['28', '30', '32', '34', '36'], colors: [{ name: "Denim Blue", img: "images/J2.jpg" }], price: "฿22,900" },
         "J003": { name: "Celine Men's Blue 90s Mid-Rise Selvedge Denim Jeans Indigo", description: "ยีนส์สไตล์ 90s จาก Celine ผ้า Selvedge Denim สี Indigo เข้ม", sizes: ['29', '30', '31', '32', '33'], colors: [{ name: "Indigo", img: "images/J3.jpg" }], price: "฿38,000" },
@@ -154,8 +238,6 @@
         "J018": { name: "SS24 Jeans Women's Dark Blue", description: "กางเกงยีนส์ผู้หญิงคอลเลกชันใหม่ล่าสุดปี 2024 สีน้ำเงินเข้มคลาสสิก", sizes: ['34', '36', '38', '40'], colors: [{ name: "Dark Blue", img: "images/J18.jpg" }], price: "฿26,000" },
         "J019": { name: "Acne Studios Cut Off Jeans White Green", description: "ดีไซน์ปลายขาแบบ Cut Off ให้ลุคดิบๆ สตรีท", sizes: ['28', '30', '32', '34'], colors: [{ name: "White Green", img: "images/J19.jpg" }], price: "฿17,000" },
         "J020": { name: "Chanel Jeans Women's Blue", description: "กางเกงยีนส์ผู้หญิง Chanel ดีไซน์ร่วมสมัย ใช้วัสดุพรีเมียมที่สุด", sizes: ['36', '38', '40'], colors: [{ name: "Blue", img: "images/J20.jpg" }], price: "฿88,000" },
-
-        // --- Group P: Streetwear ---
         "P001": { name: "Fear of God Essentials Jersey Crewneck", description: "เสื้อยืดคอกลมดีไซน์เรียบง่าย เนื้อผ้าคอตตอน 100%", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "Black", img: "images/p1black.jpg" }, { name: "Brown", img: "images/p1namtan.jpg"}, { name : "Gray", img: "images/p1gray.jpg"}], price: "฿2,675" },
         "P002": { name: "Stussy Body Scan Tee", description: "เสื้อยืดสไตล์สตรีทแฟชั่นงานนำเข้า ดีไซน์ล้ำ เท่ไม่เหมือนใคร", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "Ash Heather", img: "images/p2ash.jpg" }, { name: "Black Heather", img: "images/p2black.jpg" }, { name: "Blue Heather", img: "images/p2blue.jpg" }], price: "฿3,600" },
         "P003": { name: "Vlone Smoke Demon Angel Hoodie", description: "เสื้อแขนยาว Hoodies สุดเท่ ดีไซน์กราฟิก Angel Smoke ด้านหลัง", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "White", img: "images/p3white.jpg" }, { name: "Black", img: "images/p3black.jpg"}], price: "฿3,350" },
@@ -176,8 +258,6 @@
         "P018": { name: "Marithe Francois Girbaud Ringer Tee Ivory", description: "สไตล์เบสบอลวินเทจ สีขาว Ivory ขอบคอตัดสีน้ำเงิน", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "Ivory", img: "images/p18white.jpg" }], price: "฿2,400" },
         "P019": { name: "Cosmic The 1975 Tee", description: "เสื้อยืดลายวงดนตรี The 1975 พิมพ์ลายกราฟิก Cosmic", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "White", img: "images/p19white.jpg" }], price: "฿2,400" },
         "P020": { name: "Carnival x UMBRO Striped Jersey", description: "เสื้อฟุตบอล Jersey คอลเลกชันพิเศษร่วมกับ UMBRO", sizes: ['S', 'M', 'L', 'XL'], colors: [{ name: "Black White", img: "images/p20white.jpg" }], price: "฿2,400" },
-
-        // --- Group L: Luxury ---
         "L1": { name: "Miu Miu Logo Sunglasses", description: "In Pale Gold Metal Frame Front With Rose Gold Lenses", sizes: ['Free Size'], colors: [{ name: "Pale Gold", img: "images/L1.jpg" }], price: "฿15,500" },
         "L2": { name: "Coach Nolita 19", description: "In Signature Canvas With Gold Hardware Brown Black", sizes: ['One Size'], colors: [{ name: "Brown Black", img: "images/L2.jpg" }], price: "฿4,900" },
         "L3": { name: "Louis Vuitton Key Pouch S", description: "Classic LV Monogram Key Pouch แข็งแรง ทนทาน", sizes: ['S'], colors: [{ name: "Monogram", img: "images/L3.jpg" }], price: "฿11,500" },
@@ -209,23 +289,31 @@
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const container = document.getElementById('cart-items-list');
         const totalEl = document.getElementById('cart-total-price');
+        
         if (cart.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding:20px;">ตะกร้ายังว่างเปล่า</p>';
+            container.innerHTML = '<p style="text-align:center; margin-top:50px; color:#888;">ไม่มีสินค้าในตะกร้า</p>';
             totalEl.textContent = '฿0';
             return;
         }
+        
         let total = 0;
-        container.innerHTML = cart.map((item, index) => {
+        let html = '';
+        
+        cart.forEach((item, index) => {
             total += item.price * item.quantity;
-            return `<div class="cart-item">
-                <img src="${item.image}">
-                <div class="cart-item-details">
-                    <h4>${item.name} (${item.size})</h4>
-                    <p>฿${item.price.toLocaleString()} x ${item.quantity}</p>
-                </div>
-                <span class="remove-item" onclick="removeFromCart(${index})"><i class="fa-solid fa-xmark"></i></span>
-            </div>`;
-        }).join('');
+            html += `
+                <div class="cart-item-row">
+                    <img src="${item.image}">
+                    <div class="cart-item-info">
+                        <div class="name">${item.name}</div>
+                        <div style="font-size:12px; color:#666;">Size: ${item.size}</div>
+                        <div class="price">฿${item.price.toLocaleString()} x ${item.quantity}</div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${index})">&times;</button>
+                </div>`;
+        });
+        
+        container.innerHTML = html;
         totalEl.textContent = `฿${total.toLocaleString()}`;
     }
 
@@ -261,7 +349,6 @@
         document.getElementById('display-desc').textContent = product.description;
         document.getElementById('display-price').textContent = product.price;
 
-        // Thumbs
         const thumbList = document.getElementById('thumbnail-list');
         thumbList.innerHTML = '';
         product.colors.forEach((c, idx) => {
@@ -278,13 +365,11 @@
             if(idx === 0) mainImg.src = c.img;
         });
 
-        // Size Logic: ซ่อนถ้าเป็น Free Size หรือ One Size
         sizeSelector.innerHTML = '';
         const isFree = product.sizes.length === 1 && (product.sizes[0] === 'Free Size' || product.sizes[0] === 'One Size');
         
         if(isFree) {
             sizeArea.style.display = 'none';
-            // สร้างปุ่มหลอกเพื่อให้ระบบรู้ว่าเลือกไซส์นี้
             const b = document.createElement('button');
             b.textContent = product.sizes[0];
             b.className = 'size-btn active';
@@ -304,19 +389,18 @@
             });
         }
 
-        // Qty
         document.getElementById('increment-btn').onclick = () => { qtyDisp.textContent = parseInt(qtyDisp.textContent) + 1; };
         document.getElementById('decrement-btn').onclick = () => { 
             let v = parseInt(qtyDisp.textContent); 
             if(v > 1) qtyDisp.textContent = v - 1; 
         };
 
-        // Add Cart
         document.getElementById('add-to-cart-btn').onclick = () => {
             const activeSize = document.querySelector('.size-btn.active')?.textContent || "Standard";
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             const numPrice = parseInt(product.price.replace(/[^0-9]/g, ''));
             const existing = cart.find(i => i.name === titleEl.textContent && i.size === activeSize);
+            
             if(existing) {
                 existing.quantity += parseInt(qtyDisp.textContent);
             } else {
@@ -328,8 +412,13 @@
                     image: mainImg.src
                 });
             }
+            
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartBadge(); toggleCart();
+            updateCartBadge(); 
+
+            setTimeout(() => {
+                toggleCart();
+            }, 260); 
         };
     }
 
@@ -341,22 +430,20 @@
     function toggleContact() {
         const popups = document.getElementById('socialPopups');
         const icon = document.getElementById('contactIcon');
-        const isHidden = popups.style.display === 'none';
+        const isHidden = popups.style.display === 'none' || popups.style.display === '';
         popups.style.display = isHidden ? 'flex' : 'none';
         icon.className = isHidden ? 'fa-solid fa-xmark' : 'fa-solid fa-comment-dots';
     }
     </script>
 
-    <div class="contact-wrapper" style="position:fixed; bottom:20px; right:20px; z-index:999;">
-        <div class="social-popups" id="socialPopups" style="display:none; flex-direction:column; gap:10px; margin-bottom:10px;">
-            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig" style="background:#E1306C; color:white; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line" style="background:#00B900; color:white; width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;"><i class="fa-brands fa-line"></i></a>
+    <div class="contact-wrapper">
+        <div class="social-popups" id="socialPopups" style="display: none;">
+            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
         </div>
         <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
-            <span class="contact-label" id="contactLabel" style="margin-right:10px; font-weight:bold; background:rgba(0,0,0,0.7); color:white; padding:5px 12px; border-radius:20px;">Contact us</span>
-            <div class="main-contact-btn" style="background:#000; color:#fff; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 4px 10px rgba(0,0,0,0.3);">
-                <i class="fa-solid fa-comment-dots" id="contactIcon"></i>
-            </div>
+            <span class="contact-label" id="contactLabel">Contact us</span>
+            <div class="main-contact-btn"><i class="fa-solid fa-comment-dots" id="contactIcon"></i></div>
         </div>
     </div>
 </body>
