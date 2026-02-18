@@ -71,7 +71,6 @@
     </div>
 
     <script type="module">
-    // 1. ดึง Library ตรงจาก Google (ไม่ต้องง้อไฟล์ในเครื่อง)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -113,7 +112,7 @@
                 const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
                 // บันทึกข้อมูล
-                alert("กำลังบันทึกข้อมูล... ห้ามปิดหน้าต่างนี้");
+                alert("กำลังดำเนินการสั่งซื้อ");
                 
                 await addDoc(collection(db, "orders"), {
                     userId: user.uid,
@@ -124,7 +123,7 @@
                     createdAt: serverTimestamp()
                 });
 
-                alert("บันทึกสำเร็จ! กำลังไปหน้าชำระเงิน");
+                alert("สั่งซื้อสำเร็จ");
                 window.location.href = 'payment.html';
 
             } catch (error) {
