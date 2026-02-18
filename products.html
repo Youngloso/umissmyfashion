@@ -7,144 +7,98 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-         /* Navigation Styles */
-        nav ul { list-style: none; display: flex; gap: 20px; }
-        nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
-        nav ul li a:hover { color: #ffca85 !important; }
-
-        /* --- ปรับแต่ง Header ให้ลอยอยู่บนสุดเสมอ --- */
+        /* --- การตั้งค่า Header และ Navigation --- */
         .main-header {
-            position: fixed; 
+            position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            z-index: 10001; 
+            z-index: 20000; 
             background: #000; 
         }
-
-        /* Cart Badge Styles */
-        .nav-cart-link { position: relative; text-decoration: none; color: white; cursor: pointer; }
-        #cart-count { 
-            background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 6px; 
-            font-size: 10px; position: absolute; top: -12px; right: -10px; 
-            border: 2px solid #000; display: none;
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a {
+            color: #FFFFFF !important;
+            font-weight: bold !important;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
         }
-
-        /* --- SIDE CART CSS --- */
-        .side-cart {
-            position: fixed; top: 0; right: -400px;
-            width: 350px; height: 100%; background: #fff; z-index: 10002;
-            transition: 0.4s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            display: flex; flex-direction: column;
+        nav ul li a:hover { color: #ffca85 !important; }
+        
+        #cart-count {
+            background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 7px;
+            font-size: 11px; position: absolute; top: -8px; right: -10px;
+            font-weight: bold; border: 2px solid #000000; display: none; 
         }
-        .side-cart.active { right: 0; }
+        .nav-cart-link { position: relative; display: inline-block; color: white; text-decoration: none; }
 
+        /* --- Side Cart Styles --- */
         .cart-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 9999; display: none;
+            background: rgba(0,0,0,0.5); display: none; z-index: 20001;
         }
-
-        .cart-header { padding: 20px; background: #000; color: #fff; display: flex; justify-content: space-between; align-items: center; }
-        .close-btn { cursor: pointer; font-size: 14px; opacity: 0.8; }
-        
-        .cart-items { flex: 1; overflow-y: auto; padding: 20px; color: #333; }
-        .cart-footer { padding: 20px; border-top: 1px solid #eee; background: #f9f9f9; }
-        .cart-total { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; color: #000; }
-        
+        .side-cart {
+            position: fixed; top: 0; right: -400px; width: 350px; height: 100%;
+            background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 20002; transition: 0.4s ease; display: flex;
+            flex-direction: column; color: #000;
+        }
+        .side-cart.active { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+        .cart-total { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; }
         .view-cart-btn, .checkout-btn {
-            display: block; width: 100%; text-align: center; padding: 12px;
-            text-decoration: none; font-weight: bold; margin-bottom: 10px; border-radius: 4px;
+            width: 100%; padding: 12px; display: block; text-align: center; 
+            text-decoration: none; font-weight: bold; border: none; cursor: pointer; margin-bottom: 10px;
         }
-        .view-cart-btn { background: #000000; color: #ffffff; }
+        .view-cart-btn { background: #000; color: #fff; }
         .checkout-btn { background: #eb681c; color: #fff; }
 
-        .hero-content h2 {
-            font-family: 'Inter', 'Kanit', 'Arial', sans-serif !important;
-            font-size: 50px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; margin-bottom: 10px; color: #FFFFFF;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-        }
-        .hero-content p { font-family: 'Kanit', sans-serif; font-size: 20px; margin-bottom: 20px; }
-
-        /* --- ระบบ SEARCH เพิ่มใหม่ --- */
+        /* --- Search Overlay Styles --- */
         .search-overlay {
-            position: fixed;
-            top: 100%; 
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            z-index: 10000; 
+            position: fixed; top: 100%; left: 0; width: 100%; height: 100%;
+            background-color: #fff; z-index: 10005; 
             transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 150px; 
+            display: flex; flex-direction: column; align-items: center; padding-top: 180px; 
         }
         .search-overlay.active { top: 0; }
-
         .search-container { width: 90%; max-width: 800px; text-align: center; }
-        .search-container h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; }
+        .search-container h2 { font-size: 42px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; color: #000; }
         .search-container input {
             width: 100%; border: none; border-bottom: 2px solid #000;
-            padding: 15px; font-size: 28px; text-align: center; outline: none;
-            font-family: 'Kanit', sans-serif;
+            padding: 15px; font-size: 28px; text-align: center; outline: none; color: #000;
         }
-        .close-search {
-            position: absolute; top: 100px; right: 40px;
-            font-size: 40px; cursor: pointer; color: #000;
-        }
+        .close-search { position: absolute; top: 100px; right: 40px; font-size: 40px; cursor: pointer; color: #000; }
 
-        /* --- NEW: กล่องแสดงผลการค้นหา --- */
         #searchResults {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%; max-width: 700px; margin-top: 30px; max-height: 45vh;
+            overflow-y: auto; text-align: left;
         }
-
-        .search-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            text-decoration: none;
-            color: #000;
-            border-bottom: 1px solid #eee;
-            transition: 0.3s;
-            text-align: left;
+        .search-result-item {
+            display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #eee;
+            text-decoration: none; color: #000; transition: 0.2s;
         }
-
-        .search-item:hover { background: #f8f8f8; }
-
-        .search-item img {
-            width: 50px;
-            height: 65px;
-            object-fit: cover;
-            margin-right: 15px;
-            border-radius: 4px;
+        .search-result-item:hover { background-color: #f9f9f9; }
+        .search-result-item img {
+            width: 60px; height: 70px; object-fit: cover; margin-right: 20px; border-radius: 4px;
         }
-
-        .search-item-info h4 { margin: 0; font-size: 16px; font-weight: bold; }
-        .search-item-info p { margin: 5px 0 0; color: #b08d57; font-size: 14px; }
+        .search-result-info h4 { margin: 0; font-size: 16px; }
+        .search-result-info p { margin: 5px 0 0; color: #b08d57; font-weight: bold; }
     </style>
 </head>
 <body>
-    
+
     <div id="searchOverlay" class="search-overlay">
         <span class="close-search" onclick="closeSearch()">&times;</span>
         <div class="search-container">
             <h2>Search for products</h2>
             <input type="text" id="searchInput" placeholder="Start typing..." onkeyup="liveSearch()" autocomplete="off">
             <p id="searchStatus" style="margin-top:20px; color:#888;">Start typing to see products you are looking for.</p>
-            
             <div id="searchResults"></div>
         </div>
     </div>
-
+    
     <header class="main-header">
         <div class="header-container">
             <div class="logo"><h1>UMissMyFashion</h1></div>
@@ -168,88 +122,77 @@
             </div>
         </div>
     </header>
-    
-    <section class="products">
+
+    <section class="products" style="margin-top: 100px;">
         <div class="container">
             <h2 style="text-align: center; margin: 30px 0; font-family: serif;">U MISS MY FASHION</h2>
-            <div class="product-grid">
-                <div class="product-item"><img src="images/p1black.jpg"><h3>Fear of God Essentials</h3><p>2,675 บาท</p><a href="product-detail.html?id=P001" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Baggy 1981M</h3><p>18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L1.jpg"><h3>Miu Miu Sunglasses</h3><p>15,500 บาท</p><a href="product-detail.html?id=L1" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p5blue.jpg"><h3>Stussy Ist Venus</h3><p>6,400 บาท</p><a href="product-detail.html?id=P005" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J15.jpg"><h3>LV SS23 Jeans</h3><p>45,000 บาท</p><a href="product-detail.html?id=J015" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L15.jpg"><h3>Gucci Mini Bag</h3><p>38,000 บาท</p><a href="product-detail.html?id=L15" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p8black.jpg"><h3>Drew House Mascot</h3><p>2,700 บาท</p><a href="product-detail.html?id=P008" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Denim</h3><p>38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p2ash.jpg"><h3>Stussy Body Scan Tee</h3><p>3,600 บาท</p><a href="product-detail.html?id=P002" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L9.jpg"><h3>Celine Triomphe Belt</h3><p>18,500 บาท</p><a href="product-detail.html?id=L9" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J20.jpg"><h3>Chanel Women Blue</h3><p>88,000 บาท</p><a href="product-detail.html?id=J020" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p4white.jpg"><h3>Nike x Stussy 8 Ball</h3><p>5,000 บาท</p><a href="product-detail.html?id=P004" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L5.jpg"><h3>Vivienne Choker</h3><p>7,900 บาท</p><a href="product-detail.html?id=L5" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>19,800 บาท</p><a href="product-detail.html?id=J011" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p13white.jpg"><h3>Uniqlo Kaws Pink</h3><p>3,400 บาท</p><a href="product-detail.html?id=P013" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L2.jpg"><h3>Coach Nolita 19</h3><p>4,900 บาท</p><a href="product-detail.html?id=L2" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J7.jpg"><h3>YSL Skinny Fit</h3><p>24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p10black.jpg"><h3>Stussy Look Beyond</h3><p>2,400 บาท</p><a href="product-detail.html?id=P010" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L12.jpg"><h3>Prada Rectangle</h3><p>12,900 บาท</p><a href="product-detail.html?id=L12" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J14.jpg"><h3>Loewe Women's</h3><p>29,000 บาท</p><a href="product-detail.html?id=J014" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p16black.jpg"><h3>Carnival x Venom</h3><p>2,400 บาท</p><a href="product-detail.html?id=P016" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L17.jpg"><h3>DiorSignature B1U</h3><p>16,900 บาท</p><a href="product-detail.html?id=L17" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Loose Fit</h3><p>22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p3white.jpg"><h3>Vlone Smoke Demon</h3><p>2,350 บาท</p><a href="product-detail.html?id=P003" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L7.jpg"><h3>Coach Andrea Bag</h3><p>8,500 บาท</p><a href="product-detail.html?id=L7" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J17.jpg"><h3>Bottega Wide-Leg</h3><p>42,000 บาท</p><a href="product-detail.html?id=J017" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p19white.jpg"><h3>Cosmic The 1975</h3><p>2,400 บาท</p><a href="product-detail.html?id=P019" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L3.jpg"><h3>LV Key Pouch</h3><p>11,500 บาท</p><a href="product-detail.html?id=L3" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p6black.jpg"><h3>Mardi Mercredi</h3><p>1,100 บาท</p><a href="product-detail.html?id=P006" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L10.jpg"><h3>YSL Cassandre</h3><p>16,500 บาท</p><a href="product-detail.html?id=L10" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Jeans Men</h3><p>32,000 บาท</p><a href="product-detail.html?id=J012" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p15black.jpg"><h3>Denim Tears Sweat</h3><p>2,400 บาท</p><a href="product-detail.html?id=P015" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L14.jpg"><h3>Vivienne Octavie</h3><p>6,500 บาท</p><a href="product-detail.html?id=L14" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Relaxed Blue</h3><p>15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p9pink.jpg"><h3>Marithe Ringer</h3><p>1,400 บาท</p><a href="product-detail.html?id=P009" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L6.jpg"><h3>Longchamp Green</h3><p>5,400 บาท</p><a href="product-detail.html?id=L6" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J19.jpg"><h3>Acne Cut Off</h3><p>17,000 บาท</p><a href="product-detail.html?id=J019" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p11white.jpg"><h3>Stussy Look Beyond</h3><p>2,400 บาท</p><a href="product-detail.html?id=P011" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L16.jpg"><h3>Gucci Marmont</h3><p>17,900 บาท</p><a href="product-detail.html?id=L16" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Barrel</h3><p>34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p14black.jpg"><h3>Carnival Logo</h3><p>1,400 บาท</p><a href="product-detail.html?id=P014" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L8.jpg"><h3>Balenciaga Dynasty</h3><p>14,900 บาท</p><a href="product-detail.html?id=L8" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J18.jpg"><h3>SS24 Dark Blue</h3><p>26,000 บาท</p><a href="product-detail.html?id=J018" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p17black.jpg"><h3>ADLV Baby Donuts</h3><p>2,400 บาท</p><a href="product-detail.html?id=P017" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L11.jpg"><h3>Vivienne Drop Ear</h3><p>5,200 บาท</p><a href="product-detail.html?id=L11" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan</h3><p>35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p12black.jpg"><h3>Lifework Silket</h3><p>1,400 บาท</p><a href="product-detail.html?id=P012" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L4.jpg"><h3>Coach Cow Belts</h3><p>3,200 บาท</p><a href="product-detail.html?id=L4" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstruct</h3><p>38,000 บาท</p><a href="product-detail.html?id=J013" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p7black.jpg"><h3>Mardi Mercredi Sweat</h3><p>2,400 บาท</p><a href="product-detail.html?id=P007" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/L13.jpg"><h3>Vivienne Relief</h3><p>8,900 บาท</p><a href="product-detail.html?id=L13" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Relaxed W/G</h3><p>16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p18white.jpg"><h3>Marithe Baseball</h3><p>2,400 บาท</p><a href="product-detail.html?id=P018" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J16.jpg"><h3>Celine Kitty</h3><p>39,000 บาท</p><a href="product-detail.html?id=J016" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/p20white.jpg"><h3>Carnival x UMBRO</h3><p>2,400 บาท</p><a href="product-detail.html?id=P020" class="btn-product">รายละเอียด</a></div>
-                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Denim</h3><p>85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">รายละเอียด</a></div>
-            </div>
+            <div class="product-grid" id="mainProductGrid">
+                <div class="product-item"><img src="images/p1black.jpg"><h3>Fear of God Essentials</h3><p>ราคา: 2,675 บาท</p><a href="product-detail.html?id=P001" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J1.jpg"><h3>Acne Baggy 1981M</h3><p>ราคา: 18,500 บาท</p><a href="product-detail.html?id=J001" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L1.jpg"><h3>Miu Miu Sunglasses</h3><p>ราคา: 15,500 บาท</p><a href="product-detail.html?id=L1" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p5blue.jpg"><h3>Stussy Ist Venus</h3><p>ราคา: ,400 บาท</p><a href="product-detail.html?id=P005" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J15.jpg"><h3>LV SS23 Jeans</h3><p>ราคา: 45,000 บาท</p><a href="product-detail.html?id=J015" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L15.jpg"><h3>Gucci Mini Bag</h3><p>ราคา: 38,000 บาท</p><a href="product-detail.html?id=L15" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p8black.jpg"><h3>Drew House Mascot</h3><p>ราคา: 2,700 บาท</p><a href="product-detail.html?id=P008" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J3.jpg"><h3>Celine 90s Denim</h3><p>ราคา: 38,000 บาท</p><a href="product-detail.html?id=J003" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p2ash.jpg"><h3>Stussy Body Scan Tee</h3><p>ราคา: 3,600 บาท</p><a href="product-detail.html?id=P002" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L9.jpg"><h3>Celine Triomphe Belt</h3><p>ราคา: 18,500 บาท</p><a href="product-detail.html?id=L9" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J20.jpg"><h3>Chanel Women Blue</h3><p>ราคา: 88,000 บาท</p><a href="product-detail.html?id=J020" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p4white.jpg"><h3>Nike x Stussy 8 Ball</h3><p>ราคา: 5,000 บาท</p><a href="product-detail.html?id=P004" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L5.jpg"><h3>Vivienne Choker</h3><p>ราคา: 7,900 บาท</p><a href="product-detail.html?id=L5" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J11.jpg"><h3>Acne Super Baggy</h3><p>ราคา: 19,800 บาท</p><a href="product-detail.html?id=J011" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p13white.jpg"><h3>Uniqlo Kaws Pink</h3><p>ราคา: 3,400 บาท</p><a href="product-detail.html?id=P013" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L2.jpg"><h3>Coach Nolita 19</h3><p>ราคา: 4,900 บาท</p><a href="product-detail.html?id=L2" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J7.jpg"><h3>YSL Skinny Fit</h3><p>ราคา: 24,900 บาท</p><a href="product-detail.html?id=J007" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p10black.jpg"><h3>Stussy Look Beyond</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P010" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L12.jpg"><h3>Prada Rectangle</h3><p>ราคา: 12,900 บาท</p><a href="product-detail.html?id=L12" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J14.jpg"><h3>Loewe Women's</h3><p>ราคา: 29,000 บาท</p><a href="product-detail.html?id=J014" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p16black.jpg"><h3>Carnival x Venom</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P016" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L17.jpg"><h3>DiorSignature B1U</h3><p>ราคา: 16,900 บาท</p><a href="product-detail.html?id=L17" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J2.jpg"><h3>Acne Loose Fit</h3><p>ราคา: 22,900 บาท</p><a href="product-detail.html?id=J002" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p3white.jpg"><h3>Vlone Smoke Demon</h3><p>ราคา: 2,350 บาท</p><a href="product-detail.html?id=P003" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L7.jpg"><h3>Coach Andrea Bag</h3><p>ราคา: 8,500 บาท</p><a href="product-detail.html?id=L7" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J17.jpg"><h3>Bottega Wide-Leg</h3><p>ราคา: 42,000 บาท</p><a href="product-detail.html?id=J017" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p19white.jpg"><h3>Cosmic The 1975</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P019" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L3.jpg"><h3>LV Key Pouch</h3><p>ราคา: 11,500 บาท</p><a href="product-detail.html?id=L3" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J5.jpg"><h3>Loewe Chain Jeans</h3><p>ราคา: 36,000 บาท</p><a href="product-detail.html?id=J005" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p6black.jpg"><h3>Mardi Mercredi</h3><p>ราคา: 1,100 บาท</p><a href="product-detail.html?id=P006" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L10.jpg"><h3>YSL Cassandre</h3><p>ราคา: 16,500 บาท</p><a href="product-detail.html?id=L10" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J12.jpg"><h3>Gucci Jeans Men</h3><p>ราคา: 32,000 บาท</p><a href="product-detail.html?id=J012" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p15black.jpg"><h3>Denim Tears Sweat</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P015" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L14.jpg"><h3>Vivienne Octavie</h3><p>ราคา: 6,500 บาท</p><a href="product-detail.html?id=L14" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J10.jpg"><h3>Acne Relaxed Blue</h3><p>ราคา: 15,900 บาท</p><a href="product-detail.html?id=J010" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p9pink.jpg"><h3>Marithe Ringer</h3><p>ราคา: 1,400 บาท</p><a href="product-detail.html?id=P009" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L6.jpg"><h3>Longchamp Green</h3><p>ราคา: 5,400 บาท</p><a href="product-detail.html?id=L6" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J19.jpg"><h3>Acne Cut Off</h3><p>ราคา: 17,000 บาท</p><a href="product-detail.html?id=J019" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p11white.jpg"><h3>Stussy Look Beyond</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P011" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L16.jpg"><h3>Gucci Marmont</h3><p>ราคา: 17,900 บาท</p><a href="product-detail.html?id=L16" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J4.jpg"><h3>Loewe Barrel</h3><p>ราคา: 34,500 บาท</p><a href="product-detail.html?id=J004" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p14black.jpg"><h3>Carnival Logo</h3><p>ราคา: 1,400 บาท</p><a href="product-detail.html?id=P014" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L8.jpg"><h3>Balenciaga Dynasty</h3><p>ราคา: 14,900 บาท</p><a href="product-detail.html?id=L8" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J18.jpg"><h3>SS24 Dark Blue</h3><p>ราคา: 26,000 บาท</p><a href="product-detail.html?id=J018" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p17black.jpg"><h3>ADLV Baby Donuts</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P017" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L11.jpg"><h3>Vivienne Drop Ear</h3><p>ราคา: 5,200 บาท</p><a href="product-detail.html?id=L11" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J6.jpg"><h3>Celine Dylan</h3><p>ราคา: 35,500 บาท</p><a href="product-detail.html?id=J006" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p12black.jpg"><h3>Lifework Silket</h3><p>ราคา: 1,400 บาท</p><a href="product-detail.html?id=P012" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L4.jpg"><h3>Coach Cow Belts</h3><p>ราคา: 3,200 บาท</p><a href="product-detail.html?id=L4" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J13.jpg"><h3>Loewe Deconstruct</h3><p>ราคา: 38,000 บาท</p><a href="product-detail.html?id=J013" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p7black.jpg"><h3>Mardi Mercredi Sweat</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P007" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/L13.jpg"><h3>Vivienne Relief</h3><p>ราคา: 8,900 บาท</p><a href="product-detail.html?id=L13" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J9.jpg"><h3>Acne Relaxed W/G</h3><p>ราคา: 16,500 บาท</p><a href="product-detail.html?id=J009" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p18white.jpg"><h3>Marithe Baseball</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P018" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J16.jpg"><h3>Celine Kitty</h3><p>ราคา: 39,000 บาท</p><a href="product-detail.html?id=J016" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/p20white.jpg"><h3>Carnival x UMBRO</h3><p>ราคา: 2,400 บาท</p><a href="product-detail.html?id=P020" class="btn-product">รายละเอียด</a></div>
+                <div class="product-item"><img src="images/J8.jpg"><h3>Chanel Denim</h3><p>ราคา: 85,000 บาท</p><a href="product-detail.html?id=J008" class="btn-product">รายละเอียด</a></div>
         </div>
-    </section>
-
-    <footer><div class="container"><p>© 2026 U Miss My Fashion</p></div></footer>
-
-    <div class="contact-wrapper">
-        <div class="social-popups" id="socialPopups" style="display: none; flex-direction: column; gap: 10px; margin-bottom: 15px;">
-            <a href="https://www.instagram.com/r1ckyloso/ig" target="_blank" class="social-btn ig"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://line.me/ti/p/@umissmyfashion" target="_blank" class="social-btn line"><i class="fa-brands fa-line"></i></a>
-        </div>
-        <div style="display: flex; align-items: center; cursor: pointer;" onclick="toggleContact()">
-            <span class="contact-label" id="contactLabel">Contact us</span>
-            <div class="main-contact-btn"><i class="fa-solid fa-comment-dots" id="contactIcon"></i></div>
-        </div>
-    </div>
+    </section>  
 
     <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
     <div class="side-cart" id="sideCart">
-        <div class="cart-header"><h3>Shopping Cart</h3><span class="close-btn" onclick="closeCart()">&times; Close</span></div>
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span style="cursor:pointer;" onclick="closeCart()">&times; Close</span>
+        </div>
         <div class="cart-items" id="cartItems"></div>
         <div class="cart-footer">
             <div class="cart-total"><span>รวมทั้งหมด:</span><span id="cartTotalAmount">฿0</span></div>
@@ -258,55 +201,61 @@
         </div>
     </div>
 
-    <script src="products-data.js"></script>
-
     <script>
-        const STORAGE_KEY = 'cart';
-
-        /* --- SEARCH FUNCTIONS --- */
+        // ฟังก์ชันระบบ Search
         function openSearch() {
             document.getElementById('searchOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden'; 
             setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
         }
 
         function closeSearch() {
             document.getElementById('searchOverlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
             document.getElementById('searchInput').value = "";
-            document.getElementById('searchResults').innerHTML = "";
-            document.getElementById('searchStatus').innerText = "เริ่มพิมพ์เพื่อค้นหาสินค้าได้เลย";
+            document.getElementById('searchResults').innerHTML = ""; 
+            document.getElementById('searchStatus').innerText = "Start typing to see products you are looking for.";
         }
 
         function liveSearch() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const resultContainer = document.getElementById('searchResults');
-            const status = document.getElementById('searchStatus');
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let status = document.getElementById('searchStatus');
+            let resultContainer = document.getElementById('searchResults');
+            let products = document.querySelectorAll('.product-item');
+            let foundCount = 0;
             resultContainer.innerHTML = ""; 
+
             if (input.trim() === "") {
-                status.innerText = "เริ่มพิมพ์เพื่อค้นหาสินค้าได้เลย";
+                status.innerText = "Start typing to see products you are looking for.";
                 return;
             }
-            // กรองข้อมูลจาก allProducts ที่อยู่ในไฟล์ products-data.js
-            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(input));
-            if (filtered.length > 0) {
-                status.innerText = `เจอสินค้า ${filtered.length} รายการ`;
-                filtered.forEach(product => {
+
+            products.forEach(item => {
+                let name = item.querySelector('h3').innerText;
+                let price = item.querySelector('p').innerText;
+                let img = item.querySelector('img').src;
+                let link = item.querySelector('a').href;
+
+                if (name.toLowerCase().includes(input)) {
+                    foundCount++;
                     resultContainer.innerHTML += `
-                        <a href="${product.link}" class="search-item">
-                            <img src="${product.image}">
-                            <div class="search-item-info">
-                                <h4>${product.name}</h4>
-                                <p>฿${product.price.toLocaleString()}</p>
+                        <a href="${link}" class="search-result-item">
+                            <img src="${img}">
+                            <div class="search-result-info">
+                                <h4>${name}</h4>
+                                <p>${price}</p>
                             </div>
                         </a>`;
-                });
+                }
+            });
+
+            if (foundCount > 0) {
+                status.innerText = `Found ${foundCount} products for '${input}'`;
             } else {
-                status.innerText = "ไม่พบสินค้าที่ค้นหา";
+                status.innerText = "No products found.";
             }
         }
 
-        /* --- CART & UI FUNCTIONS --- */
+        // ระบบจัดการตะกร้าสินค้า
+        const STORAGE_KEY = 'cart';
         function openCart() {
             document.getElementById('sideCart').classList.add('active');
             document.getElementById('cartOverlay').style.display = 'block';
@@ -320,30 +269,35 @@
             const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             const badge = document.getElementById('cart-count');
             const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-            if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'inline-block' : 'none'; }
+            if (badge) {
+                badge.textContent = total;
+                badge.style.display = total > 0 ? 'inline-block' : 'none';
+            }
         }
         function renderSideCart() {
             const container = document.getElementById('cartItems');
             const totalDisplay = document.getElementById('cartTotalAmount');
             const cart = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align:center; margin-top:20px;">ตะกร้ายังว่างเปล่า</p>';
+                container.innerHTML = '<p style="text-align:center; margin-top:20px;">ตะกร้าของคุณยังว่างเปล่า</p>';
                 totalDisplay.innerText = '฿0';
                 updateCartBadge();
                 return;
             }
             let html = ''; let total = 0;
             cart.forEach((item, index) => {
+                // คำนวณราคาสินค้า (ลบคำว่า "บาท" และคอมม่าออกเพื่อคำนวณ)
+                let priceNum = parseInt(item.price.toString().replace(/[^0-9]/g, ''));
                 html += `
                     <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:12px; align-items:center;">
-                        <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:4px;">
+                        <img src="${item.image}" style="width:50px; height:60px; object-fit:cover; border-radius:4px;">
                         <div style="flex-grow:1;">
                             <div style="font-weight:bold; font-size:14px; color:#000;">${item.name}</div>
-                            <div style="color:#e0ac5b; font-size:13px;">฿${item.price.toLocaleString()} x ${item.quantity}</div>
+                            <div style="color:#b08d57; font-size:13px;">฿${priceNum.toLocaleString()} x ${item.quantity}</div>
                         </div>
                         <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; font-size:18px;">&times;</button>
                     </div>`;
-                total += item.price * item.quantity;
+                total += priceNum * item.quantity;
             });
             container.innerHTML = html;
             totalDisplay.innerText = `฿${total.toLocaleString()}`;
@@ -355,20 +309,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
             renderSideCart();
         }
-        function toggleContact() {
-            const popups = document.getElementById('socialPopups');
-            const icon = document.getElementById('contactIcon');
-            const label = document.getElementById('contactLabel');
-            if (popups.style.display === 'flex') {
-                popups.style.display = 'none';
-                icon.className = 'fa-solid fa-comment-dots';
-                label.style.display = 'block';
-            } else {
-                popups.style.display = 'flex';
-                icon.className = 'fa-solid fa-xmark';
-                label.style.display = 'none';
-            }
-        }
+        
         document.addEventListener('DOMContentLoaded', updateCartBadge);
     </script>
 </body>
