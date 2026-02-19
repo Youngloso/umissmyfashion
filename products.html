@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* --- การตั้งค่า Header และ Navigation --- */
+        
         .main-header {
             position: fixed;
             top: 0;
@@ -32,7 +32,7 @@
         }
         .nav-cart-link { position: relative; display: inline-block; color: white; text-decoration: none; }
 
-        /* --- Side Cart Styles --- */
+        
         .cart-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); display: none; z-index: 20001;
@@ -55,7 +55,7 @@
         .view-cart-btn { background: #000; color: #fff; }
         .checkout-btn { background: #eb681c; color: #fff; }
 
-        /* --- Search Overlay Styles --- */
+    
         .search-overlay {
             position: fixed; top: 100%; left: 0; width: 100%; height: 100%;
             background-color: #fff; z-index: 10005; 
@@ -202,7 +202,7 @@
     </div>
 
     <script>
-        // ฟังก์ชันระบบ Search
+        
         function openSearch() {
             document.getElementById('searchOverlay').classList.add('active');
             setTimeout(() => { document.getElementById('searchInput').focus(); }, 500);
@@ -254,7 +254,7 @@
             }
         }
 
-        // ระบบจัดการตะกร้าสินค้า
+        
         const STORAGE_KEY = 'cart';
         function openCart() {
             document.getElementById('sideCart').classList.add('active');
@@ -286,7 +286,7 @@
             }
             let html = ''; let total = 0;
             cart.forEach((item, index) => {
-                // คำนวณราคาสินค้า (ลบคำว่า "บาท" และคอมม่าออกเพื่อคำนวณ)
+                
                 let priceNum = parseInt(item.price.toString().replace(/[^0-9]/g, ''));
                 html += `
                     <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:12px; align-items:center;">
@@ -314,3 +314,4 @@
     </script>
 </body>
 </html>
+
