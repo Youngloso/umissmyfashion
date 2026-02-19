@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Navigation Styles */
+    
         nav ul { list-style: none; display: flex; gap: 20px; }
         nav ul li a { color: #FFFFFF !important; font-weight: bold !important; text-decoration: none; font-size: 18px; transition: 0.3s; }
         nav ul li a:hover { color: #ffca85 !important; }
 
-        /* --- ปรับแต่ง Header ให้ลอยอยู่บนสุดเสมอ --- */
+    
         .main-header {
             position: fixed; 
             top: 0;
@@ -22,7 +22,7 @@
             background: #000; 
         }
 
-        /* Cart Badge Styles */
+        
         .nav-cart-link { position: relative; text-decoration: none; color: white; cursor: pointer; }
         #cart-count { 
             background: #ff4d4d; color: white; border-radius: 50%; padding: 2px 6px; 
@@ -30,7 +30,7 @@
             border: 2px solid #000; display: none;
         }
 
-        /* --- SIDE CART CSS --- */
+        
         .side-cart {
             position: fixed; top: 0; right: -400px;
             width: 350px; height: 100%; background: #fff; z-index: 10002;
@@ -66,7 +66,7 @@
         }
         .hero-content p { font-family: 'Kanit', sans-serif; font-size: 20px; margin-bottom: 20px; }
 
-        /* --- ระบบ SEARCH เพิ่มใหม่ --- */
+        
         .search-overlay {
             position: fixed;
             top: 100%; 
@@ -95,7 +95,7 @@
             font-size: 40px; cursor: pointer; color: #000;
         }
 
-        /* --- NEW: กล่องแสดงผลการค้นหา --- */
+    
         #searchResults {
             width: 100%;
             max-width: 600px;
@@ -210,7 +210,7 @@
     <script src="products-data.js"></script>
 
     <script>
-        // --- ฟังก์ชันสำหรับ SEARCH (ดึงจากไฟล์ products-data.js) ---
+        
         function openSearch() {
             document.getElementById('searchOverlay').classList.add('active');
             document.body.style.overflow = 'hidden'; 
@@ -237,7 +237,7 @@
                 return;
             }
 
-            // กรองข้อมูลจาก allProducts ที่อยู่ในไฟล์ products-data.js
+            
             const filtered = allProducts.filter(product => 
                 product.name.toLowerCase().includes(input)
             );
@@ -262,7 +262,7 @@
             }
         }
 
-        // --- ระบบ CART และอื่นๆ (โค้ดเดิมของคุณ) ---
+        
         const STORAGE_KEY = 'cart';
         function openCart() {
             document.getElementById('sideCart').classList.add('active');
@@ -356,3 +356,4 @@
     </div>
 </body>
 </html>
+
