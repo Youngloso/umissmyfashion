@@ -2,23 +2,19 @@
 /*              code ฟอนต์
 /* =================================== */
 @font-face {
-    font-family: 'UMMF-DeutschGothic'; /* ชื่อฟอนต์ที่คุณจะใช้เรียกใน CSS */
-    /* *** PATH: ตรวจสอบให้แน่ใจว่าไฟล์ Deutsch.ttf อยู่ในโฟลเดอร์ fonts/ *** */
+    font-family: 'UMMF-DeutschGothic';
     src: url('fonts/Deutsch.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
 
-/* 1. CSS Reset: ลบขอบและช่องว่างอัตโนมัติของเบราว์เซอร์ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* =================================== */
-/* 1. ฟอนต์และค่าพื้นฐาน */
-/* =================================== */
+
 @font-face {
     font-family: 'UMMF-DeutschGothic';
     src: url('fonts/Deutsch.ttf') format('truetype'); 
@@ -35,9 +31,6 @@ body {
     line-height: 1.6;
 }
 
-/* =================================== */
-/* 2. Header (Rundown Style) - สวยแล้วคงไว้ */
-/* =================================== */
 .main-header {
     background-color: #000000 !important;
     padding: 15px 0;
@@ -56,7 +49,7 @@ body {
     position: relative; /* สำคัญ: เพื่อให้ Nav อ้างอิงจุดกึ่งกลางได้ */
 }
 
-/* ปรับให้ Logo มีความกว้างคงที่ (ช่วยเรื่อง Balance) */
+
 header .logo {
     flex: 1; /* กินพื้นที่ฝั่งซ้าย */
     display: flex;
@@ -97,9 +90,6 @@ header h1 {
 #cart-count, .badge { background: #ff4d4d !important; color: white !important; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
 
 
-/* =================================== */
-/*         (Hero Section)              */
-/* =================================== */
 .hero {
     background-color: #000000; 
     height: 400px;
@@ -112,7 +102,6 @@ header h1 {
 .hero-content {
     padding: 30px;
 }
-/* ***  เพิ่มฟอนต์ Gothic ให้กับหัวข้อ Hero *** */
 .hero-content h2 {
     font-family: 'UMMF-DeutschGothic', serif;
     font-size: 2.5em;
@@ -136,9 +125,6 @@ header h1 {
     background-color: #f4c478;
 }
 
-/* =================================== */
-/*  Product Showcase & Product Listing */
-/* =================================== */
 .container {
     width: 95%; 
     max-width: 95vw; 
@@ -150,7 +136,7 @@ header h1 {
     padding: 40px 0;
     text-align: center;
 }
-/* *** ฟอนต์ Gothic ให้กับหัวข้อ Products *** */
+
 .products h2 {
     font-family: 'UMMF-DeutschGothic', serif;
     font-size: 2.5em; 
@@ -221,9 +207,7 @@ header h1 {
     background-color: #555;
 }
 
-/* =================================== */
-/* โค้ดสำหรับ Footer */
-/* =================================== */
+
 footer {
     background-color: #000000;
     color: white;
@@ -236,9 +220,7 @@ footer p {
     margin: 5px 0;
 }
 
-/* =================================== */
-/* Responsive Design (สำหรับมือถือและแท็บเล็ต) */
-/* =================================== */
+
 @media (max-width: 768px) {
     /* บนมือถือ ให้ลด Padding ด้านข้างลงเหลือ 20px */
     .container {
@@ -265,16 +247,16 @@ footer p {
         font-size: 1em;
     }
     
-    /* ส่วน Hero */
+    
     .hero {
         height: 300px;
     }
-    /* *** โค้ดที่แก้ไข: ปรับขนาดฟอนต์ Hero บนมือถือ *** */
+    
     .hero-content h2 {
         font-size: 2em;
     }
 
-    /* ส่วน Product Listing (หน้า products.html) */
+
     .product-grid {
         grid-template-columns: 1fr; /* บนมือถือให้แสดงทีละ 1 คอลัมน์ */
         gap: 20px;
@@ -287,11 +269,8 @@ footer p {
         height: 200px; /* ลดความสูงรูปบนมือถือ */
     }
 }
-/* =================================== */
-/* Floating Contact Button (ที่เพิ่มใหม่) */
-/* =================================== */
 
-/* จัดตำแหน่งปุ่มไว้ขวาล่าง */
+
 .contact-wrapper {
     position: fixed;
     bottom: 30px;
@@ -304,7 +283,7 @@ footer p {
     font-family: 'Arial', sans-serif;
 }
 
-/* ตัวหนังสือสีขาวในกล่อง Contact us */
+
 .contact-label {
     background: white;
     color: #333;
@@ -316,7 +295,7 @@ footer p {
     margin-right: 5px;
 }
 
-/* ปุ่มกลมสีดำที่มีไอคอนแชท */
+
 .main-contact-btn {
     background-color: #000;
     color: #fff;
@@ -334,7 +313,6 @@ footer p {
 
 .main-contact-btn:hover { transform: scale(1.1); }
 
-/* กล่องเก็บปุ่ม IG และ LINE */
 .social-popups {
     display: none; /* ซ่อนไว้รอเปิด */
     flex-direction: column;
@@ -357,24 +335,22 @@ footer p {
     transition: 0.3s;
 }
 
-/* สีตามแบรนด์ */
 .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .line { background-color: #06c755; }
 
 .social-btn:hover { transform: translateY(-5px); }
 
-/* แอนิเมชั่นตอนกดเปิด */
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ซ่อน Label เมื่อเปิดปุ่ม X */
+
 .hidden { display: none; }
 
-/*โค้ดใหม่*/
 
-/* 1. ทำให้ตัวเลขสีแดงเด้งขึ้นมาเหมือนรูปแรก */
+
+
 #cart-count {
     background: #ff4d4d;
     color: white;
@@ -389,7 +365,7 @@ footer p {
     display: none; /* จะถูกเปิดโดย JavaScript เมื่อมีของ */
 }
 
-/* 2. ทำให้กดแล้ว Side Cart เด้งออกมาได้จริง */
+
 .side-cart {
     position: fixed;
     top: 0;
@@ -403,7 +379,7 @@ footer p {
 }
 
 .side-cart.active {
-    right: 0; /* แสดงออกมาเมื่อมีการกด */
+    right: 0;
 }
 
 .cart-overlay {
@@ -418,7 +394,7 @@ footer p {
 }
 
 
-/* จัดการตำแหน่งไอคอนและ Badge */
+
 .nav-cart-link {
     position: relative;
     display: inline-block;
@@ -438,7 +414,7 @@ footer p {
     display: none; /* จะแสดงผลเมื่อมีสินค้าผ่าน JS */
 }
 
-/* ปรับปรุงหน้าตา Side Cart (จากรูปที่ส่งมา) */
+
 .side-cart {
     position: fixed;
     top: 0;
@@ -455,7 +431,7 @@ footer p {
 }
 
 .side-cart.active {
-    right: 0; /* แสดงผล */
+    right: 0; 
 }
 
 .cart-header {
@@ -491,7 +467,6 @@ footer p {
     z-index: 9998;
 }
 
-/* ปุ่มต่างๆ ในตะกร้า */
 .checkout-btn, .view-cart-btn {
     display: block;
     width: 100%;
@@ -508,7 +483,7 @@ footer p {
 
 
 
-/* จัดการตำแหน่งเลข 2 สีแดงให้ลอยเหนือตะกร้า */
+
 .nav-cart-link {
     position: relative;
     display: inline-block;
@@ -525,14 +500,13 @@ footer p {
     right: -10px;
     font-weight: bold;
     border: 2px solid #000;
-    display: none; /* แสดงผลอัตโนมัติเมื่อมีของผ่าน JS */
+    display: none; 
 }
 
-/* ปรับแต่ง Side Cart ให้สวยงามตามรูปที่คุณต้องการ */
 .side-cart {
     position: fixed;
     top: 0;
-    right: -100%; /* ซ่อนไว้ทางขวา */
+    right: -100%;
     width: 350px;
     height: 100vh;
     background: #fff;
@@ -568,7 +542,7 @@ footer p {
     border-top: 1px solid #eee;
 }
 
-/* ปุ่มกดให้ดูโมเดิร์น */
+
 .view-cart-btn, .checkout-btn {
     display: block;
     width: 100%;
@@ -584,19 +558,14 @@ footer p {
 .view-cart-btn { background: #000; color: #fff; }
 .checkout-btn { background: #28a745; color: #fff; border: none; }
 
-/* โค้ดใหม่*/
 
-/* =================================== */
-/* ส่วนแก้ไขตำแหน่งตะกร้า (วางทับท้ายไฟล์) */
-/* =================================== */
 
-/* 1. เพิ่มระยะห่างระหว่างไอคอนให้ไม่เบียดกัน */
 .header-right-icons { 
     display: flex !important; 
     gap: 25px !important; 
 }
 
-/* 2. ตั้งค่าให้ Badge เลขแดงลอยทับตะกร้าได้เป๊ะขึ้น */
+
 .header-right-icons a { 
     position: relative !important; 
     display: flex !important;
@@ -621,3 +590,4 @@ footer p {
     padding: 0 !important;
     z-index: 10 !important;
 }
+
